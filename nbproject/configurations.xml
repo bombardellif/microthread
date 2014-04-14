@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>include/Tcb.h</itemPath>
+      <itemPath>include/mdata.h</itemPath>
+      <itemPath>include/mthread.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,6 +15,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>src/mthread.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -25,6 +29,10 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>src</Elem>
+    <Elem>include</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="3">
@@ -37,6 +45,14 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="include/Tcb.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mdata.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mthread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="3">
       <toolsSet>
@@ -60,6 +76,14 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="include/Tcb.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mdata.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mthread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>
