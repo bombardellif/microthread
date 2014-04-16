@@ -4,14 +4,22 @@
  *
  * VERSÃO 1 - 20/03/2014
  */
- 
+
 typedef int uth_id;
 typedef char boolean;
-/*
- * Exemplo de estrutura de dados "mutex"
- * Os grupos devem alterar essa estrutura de acordo com sua necessidade
- */ 
-typedef struct mutex {
-	int flag;
-    //TCB *next;
+
+
+typedef struct Smmutex_t{
+    int flag;
+    OrderedQueue waitingQueue;
 } mmutex_t;
+
+/**
+ * Compare two int pointers, returns 0 iff the content pointed by a is equal (natural comparison) to the content pointed by b, returns 1 iff a's content is greater than b's, returns -1 iff a's content is less than b's
+ * @param a First argument to be compared
+ * @param b Second argument to be compared
+ * @return Semantically speaking, 0 iff a is equal to b, 1 iff a > b, -1 otherwise
+ */
+int intPointerCompare(int* a, int* b){
+    return (*a == *b) ? 0 : ((*a > *b) ? 1 : -1);
+}

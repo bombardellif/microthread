@@ -12,8 +12,8 @@
 
 #include <assert.h>
 
-//static OrderedQueue readyQueue;
-//static List threadList;
+static OrderedQueue readyQueue = NULL;
+static List threadList = NULL;
 static Tcb* executingThread = NULL;
 static boolean yielding;
 static ucontext_t terminateContext;
@@ -28,6 +28,40 @@ void setYielding(boolean yield) {
 }
 
 /**
+ * Add the thread tcb to the list of current threads in the scheduler
+ * @param tcb Thread Control Block related to the thread to be inserted
+ */
+void addThread(Tcb* tcb){
+    //Initialize the list, if hasn't been yet
+    if (threadList == NULL){
+        newList(threadList);
+    }
+    add(threadList, tcb, tcbCompare);
+}
+
+/**
+ * Schedule processes, choose a new ready thread to run on CPU, assume that the last executed thread was succesfully taken out from the CPU and had its context and statistics saved.
+ * If there is no ready thread ...
+ */
+void schedule(){
+    if (readyQueue == NULL){
+        return;
+    }
+    //Take the next thread from the ready queue
+    Tcb* nextToRun = dequeue(readyQueue);
+    
+    //There might have come something
+    assert(nextToRun != NULL);
+    
+    setInitialTime(nextToRun, now);
+    
+    //Call the thread. Note it will not return here, because the thread has another context. It will return to the return context sat in its structure.
+    
+}
+
+
+
+/**
  * Esse procedimento deve salvar o contexto atual na TCB da thread em execução.
  * 
  */
@@ -36,6 +70,15 @@ void saveContext() {
     assert(executingThread != NULL);
     
     getcontext(&(executingThread->context));
+}
+
+/**
+ * Returns the Thread Control Block, stored in the current list of threads, that has the id = th, sent by paramenter. If there is no such thread, returns NULL
+ * @param th Id of the thread to be searched
+ * @return The pointer to the thread with id = th, returns NULL if such was not found
+ */
+Tcb* getThreadById(uth_id th){
+    get(threadList, &th, intPointerCompare);
 }
 
 /**

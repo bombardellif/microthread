@@ -9,17 +9,16 @@
 #define	MMUTEX_T_H
 
 #include "OrderedQueue.h"
+#include "mdata.h"
 
-typedef struct Smmutex_t{
-    int flag;
-    OrderedQueue waitingQueue;
-} mmutex_t;
+typedef enum {Locked, Free} MutexFlag;
+
 
 mmutex_t* newmmutex_t(mmutex_t* mutex);
 void setFlag(mmutex_t* mutex, MutexFlag flag);
-void addToWaitingQueue(mmutex_t* mutex, uth_tid* th);
+void addToWaitingQueue(mmutex_t* mutex, uth_id* th);
 MutexFlag getFlag(mmutex_t* mutex);
-uth_tid* getFromWaitingQueue(mmutex_t* mutex);
+uth_id* getFromWaitingQueue(mmutex_t* mutex);
 
 #endif	/* MMUTEX_T_H */
 

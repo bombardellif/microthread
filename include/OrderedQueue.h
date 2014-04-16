@@ -8,13 +8,13 @@
 #ifndef ORDEREDQUEUE_H
 #define	ORDEREDQUEUE_H
 
-//Extends List
 #include "List.h"
 
+//"Extends" List
 typedef List OrderedQueue;
 
 OrderedQueue* newOrderedQueue(OrderedQueue* queue);
-void* enqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*));
+void enqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*));
 void* dequeue(OrderedQueue* queue);
 
 #endif	/* ORDEREDQUEUE_H */

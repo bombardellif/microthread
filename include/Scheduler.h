@@ -21,7 +21,9 @@ void saveContext();
 void changeState(State state, Tcb* tcb);
 Tcb* getThreadById(uth_id th);
 ucontext_t* getTerminateContext();
+void terminateThread();
 Tcb* getExecutingThread();
+
 
 #endif	/* SCHEDULER_H */
 

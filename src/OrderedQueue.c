@@ -13,7 +13,7 @@ OrderedQueue* newOrderedQueue(OrderedQueue* queue){
     return queue;
 }
 
-void* enqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*)){
+void enqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*)){
     add(queue, e, comparator);
 }
 
