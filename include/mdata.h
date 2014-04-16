@@ -1,10 +1,12 @@
 /*
- * mdata.h: arquivo de inclusão onde os grupos devem colocar as definições
+ * mdata.h: arquivo de inclusÃ£o onde os grupos devem colocar as definiÃ§Ãµes
  *          de suas estruturas de dados
  *
- * VERSÃO 1 - 20/03/2014
+ * VERSÃƒO 1 - 20/03/2014
  */
  
+typedef int uth_id;
+typedef char boolean;
 /*
  * Exemplo de estrutura de dados "mutex"
  * Os grupos devem alterar essa estrutura de acordo com sua necessidade

@@ -1,16 +1,16 @@
 /*
- * mthread.h: arquivo de inclus„o com os protÛtipos das funÁıes a serem
- *            implementadas na realizaÁ„o do trabalho.
+ * mthread.h: arquivo de inclus√£o com os prot√≥tipos das fun√ß√µes a serem
+ *            implementadas na realiza√ß√£o do trabalho.
  *
- * N√O MODIFIQUE ESTE ARQUIVO.
+ * N√ÉO MODIFIQUE ESTE ARQUIVO.
  *
- * VERS√O 1 - 20/03/2014
+ * VERS√ÉO 1 - 20/03/2014
  */
 #ifndef __mthread__
 #define __mthread__ 1
 
-#include "mdata.h"   /* arquivo de inclus„o com as estruturas de dados definidas
-                     * na implementaÁ„o do trabalho. Deve incluir a estrutura TCB e a
+#include "mdata.h"   /* arquivo de inclus√£o com as estruturas de dados definidas
+                     * na implementa√ß√£o do trabalho. Deve incluir a estrutura TCB e a
                      * aquela empregada para o mutex. Por exemplo:
                      *     typedef mutex {
                      *         int flag;

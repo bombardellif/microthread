@@ -35,6 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/Scheduler.o \
+	${OBJECTDIR}/src/Tcb.o \
 	${OBJECTDIR}/src/mthread.o
 
 
@@ -63,6 +65,16 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibmthread.a: ${OBJECTFILES}
 	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibmthread.a
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibmthread.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibmthread.a
+
+${OBJECTDIR}/src/Scheduler.o: src/Scheduler.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Scheduler.o src/Scheduler.c
+
+${OBJECTDIR}/src/Tcb.o: src/Tcb.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Tcb.o src/Tcb.c
 
 ${OBJECTDIR}/src/mthread.o: src/mthread.c 
 	${MKDIR} -p ${OBJECTDIR}/src

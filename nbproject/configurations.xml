@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>include/Scheduler.h</itemPath>
       <itemPath>include/Tcb.h</itemPath>
       <itemPath>include/mdata.h</itemPath>
       <itemPath>include/mthread.h</itemPath>
@@ -15,6 +16,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>src/Scheduler.c</itemPath>
+      <itemPath>src/Tcb.c</itemPath>
       <itemPath>src/mthread.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -45,11 +48,17 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="include/Scheduler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Tcb.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/mdata.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/mthread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Scheduler.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/Tcb.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -76,11 +85,17 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="include/Scheduler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Tcb.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/mdata.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/mthread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Scheduler.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/Tcb.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
       </item>
