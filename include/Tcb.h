@@ -8,16 +8,19 @@
 #ifndef TCB_H
 #define	TCB_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
+#include <ucontext.h>
+#include "mdata.h"
 
+typedef struct {
+    uth_id id;
+    uth_id waitingThId;
+    ucontext_t context;
+    long executedTime;
+    long initialTime;
+} Tcb;
 
-
-
-#ifdef	__cplusplus
-}
-#endif
+Tcb* createTcb(uth_id id, ucontext_t context);
+int freeTcb(Tcb* tcb);
 
 #endif	/* TCB_H */
 
