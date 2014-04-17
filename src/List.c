@@ -12,7 +12,7 @@ List* newList(List* listDescriber){
     return listDescriber;
 }
 
-void add(List* listDescriber, void* e){
+void listAdd(List* listDescriber, void* e){
     //Crete new element of the list
     ListElem *newOne = malloc(sizeof(ListElem));
     newOne->e = e;
@@ -56,7 +56,7 @@ void* getElement(List* listDescriber, void* e, int (*comparator) (void*, void*))
     
 }
 
-void* get(List* listDescriber, void* e, int (*comparator) (void*, void*)){
+void* listGet(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     ListElem el;
     //Look for the target element
     if ((el = getElement(e, comparator)) != NULL){
@@ -65,7 +65,7 @@ void* get(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     }
 }
 
-void remove(List* listDescriber, void* e, int (*comparator) (void*, void*)){
+void listRemove(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     ListElem removing;
     //If we have found the one we want to remove
     if ((removing = getElement(e, comparator)) != NULL){

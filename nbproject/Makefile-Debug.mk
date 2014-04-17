@@ -35,8 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/List.o \
+	${OBJECTDIR}/src/OrderedQueue.o \
 	${OBJECTDIR}/src/Scheduler.o \
 	${OBJECTDIR}/src/Tcb.o \
+	${OBJECTDIR}/src/mmutex_t.o \
 	${OBJECTDIR}/src/mthread.o
 
 
@@ -66,6 +69,16 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibmthread.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibmthread.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibmthread.a
 
+${OBJECTDIR}/src/List.o: src/List.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/List.o src/List.c
+
+${OBJECTDIR}/src/OrderedQueue.o: src/OrderedQueue.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/OrderedQueue.o src/OrderedQueue.c
+
 ${OBJECTDIR}/src/Scheduler.o: src/Scheduler.c 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
@@ -75,6 +88,11 @@ ${OBJECTDIR}/src/Tcb.o: src/Tcb.c
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Tcb.o src/Tcb.c
+
+${OBJECTDIR}/src/mmutex_t.o: src/mmutex_t.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/mmutex_t.o src/mmutex_t.c
 
 ${OBJECTDIR}/src/mthread.o: src/mthread.c 
 	${MKDIR} -p ${OBJECTDIR}/src

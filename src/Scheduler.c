@@ -9,6 +9,7 @@
 #include "Tcb.h"
 #include <ucontext.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include <assert.h>
 
@@ -36,7 +37,7 @@ void addThread(Tcb* tcb){
     if (threadList == NULL){
         newList(threadList);
     }
-    add(threadList, tcb, tcbCompare);
+    listAdd(threadList, tcb, tcbCompare);
 }
 
 /**
@@ -59,8 +60,6 @@ void schedule(){
     
 }
 
-
-
 /**
  * Esse procedimento deve salvar o contexto atual na TCB da thread em execução.
  * 
@@ -73,12 +72,47 @@ void saveContext() {
 }
 
 /**
+ * Change the state of the given Thread to Ready by updating its execution time
+ * history and moving it to the ready queue of the scheduler.
+ * Note-1: If null is sent in the parameter, then the function changes the state
+ * of the current executing thread.
+ * Note-2: If the parameter informed is NULL and the scheduler is not in its
+ * state of yielding, then the call of this function has no effect.
+ * @param tcbToChange
+ */
+void changeStateToReady(Tcb* tcbToChange) {
+    // assertion
+    assert(executingThread != NULL);
+    assert(readyQueue != NULL);
+    
+    if (yielding || tcbToChange) {
+        
+        // calculates the total of time executing by the thread
+        executingThread->executedTime = executingThread->initialTime - time(NULL);
+
+        // enqueues the thread in the ready prioriry queue, if tcbToChange is null, then
+        // enqueue the TCB of the current executing thread
+        enqueue(&readyQueue, (tcbToChange) ? tcbToChange : executingThread, executedTimeTcbCompare);
+    }
+}
+
+boolean changeStateToWaiting(Tcb* tcbToDepend) {
+    if (tcbToDepend->waitingThId) {
+        return False;
+    } else {
+        if (yielding && tcbToDepend) {
+            tcbToDepend->waitingThId = executingThread->id;
+        }
+    }
+}
+
+/**
  * Returns the Thread Control Block, stored in the current list of threads, that has the id = th, sent by paramenter. If there is no such thread, returns NULL
  * @param th Id of the thread to be searched
  * @return The pointer to the thread with id = th, returns NULL if such was not found
  */
 Tcb* getThreadById(uth_id th){
-    get(threadList, &th, intPointerCompare);
+    listGet(threadList, &th, intPointerCompare);
 }
 
 /**

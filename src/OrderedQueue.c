@@ -14,7 +14,7 @@ OrderedQueue* newOrderedQueue(OrderedQueue* queue){
 }
 
 void enqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*)){
-    add(queue, e, comparator);
+    listAdd(queue, e, comparator);
 }
 
 void* dequeue(OrderedQueue* queue){

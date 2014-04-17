@@ -4,9 +4,12 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>include/List.h</itemPath>
+      <itemPath>include/OrderedQueue.h</itemPath>
       <itemPath>include/Scheduler.h</itemPath>
       <itemPath>include/Tcb.h</itemPath>
       <itemPath>include/mdata.h</itemPath>
+      <itemPath>include/mmutex_t.h</itemPath>
       <itemPath>include/mthread.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -16,8 +19,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>src/List.c</itemPath>
+      <itemPath>src/OrderedQueue.c</itemPath>
       <itemPath>src/Scheduler.c</itemPath>
       <itemPath>src/Tcb.c</itemPath>
+      <itemPath>src/mmutex_t.c</itemPath>
       <itemPath>src/mthread.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -48,17 +54,29 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="include/List.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/OrderedQueue.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Scheduler.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Tcb.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/mdata.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/mmutex_t.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/mthread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/List.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/OrderedQueue.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/Scheduler.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/Tcb.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/mmutex_t.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -85,17 +103,29 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="include/List.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/OrderedQueue.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Scheduler.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Tcb.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/mdata.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/mmutex_t.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/mthread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/List.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/OrderedQueue.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/Scheduler.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/Tcb.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/mmutex_t.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
       </item>

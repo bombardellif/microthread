@@ -5,8 +5,13 @@
  * VERSÃO 1 - 20/03/2014
  */
 
+#include "Tcb.h"
+
+
 typedef int uth_id;
 typedef char boolean;
+#define True 1;
+#define False 0;
 
 
 typedef struct Smmutex_t{
@@ -22,4 +27,16 @@ typedef struct Smmutex_t{
  */
 int intPointerCompare(int* a, int* b){
     return (*a == *b) ? 0 : ((*a > *b) ? 1 : -1);
+}
+
+/**
+ * Compare the time of execution of two TCBs, return 0 (Zero) if both are equals,
+ * returns a number greater than 0 if a's time is greater than b's, and returns
+ * a number less than 0 if b's time is greater than a's one.
+ * @param a
+ * @param b
+ * @return int  0 if equal, greater than 0 if a>b, less than 0 else
+ */
+int executedTimeTcbCompare(Tcb* a, Tcb* b) {
+    return a->executedTime - b->executedTime;
 }

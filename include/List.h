@@ -22,9 +22,9 @@ typedef struct SListElem{
 } ListElem;
 
 List* newList(List* listDescriber);
-void add(List* listDescriber, void* e);
-void* get(List* listDescriber, void* e, int (*comparator) (void*, void*));
-void remove(List* listDescriber, void* e, int (*comparator) (void*, void*));
+void listAdd(List* listDescriber, void* e);
+void* listGet(List* listDescriber, void* e, int (*comparator) (void*, void*));
+void listRemove(List* listDescriber, void* e, int (*comparator) (void*, void*));
 
 #endif	/* LIST_H */
 
