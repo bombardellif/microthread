@@ -12,7 +12,55 @@ List* newList(List* listDescriber){
     return listDescriber;
 }
 
-void listAdd(List* listDescriber, void* e){
+void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*)){
+    //Crete new element of the list
+    ListElem *newOne = malloc(sizeof(ListElem));
+    newOne->e = e;
+    
+    //If the list hasn't been initialized yet
+    if (listDescriber == NULL){
+        //Then, first initialize it
+        listDescriber.begin = newOne;
+        listDescriber.end   = newOne;
+        //new one is the first, hence the previous is null
+        newOne->prev = NULL;
+    }else{
+        //Iterate over the list, searching
+        ListElem *current = &List.begin;
+        while(current != NULL){
+            //Comparator returns greater than 0 iff e is greater than current->e
+            if ((*comparator)(e, current->e) > 0){
+                break;
+            }
+            //move forward
+            current = current->next;
+        }
+        
+        //Surfed the whole list, so insert in the end
+        if (current == NULL){
+            //Put pointers in order, note we add the new one to the end
+            listDescriber.end->next = newOne;
+            newOne->prev = listDescriber.end;
+            
+        }else{ //Found a place inside the list to insert e
+            
+            //newOne will be inserted just before current
+            newOne->next = current;
+            newOne->prev = current->prev;
+            current->prev = newOne;
+            
+            //Inserting in the first position?
+            if (listDescriber->begin == current){
+                listDescriber->begin = newOne;
+            }else{
+                newOne->prev->next = newOne;
+            }
+        }
+    }
+    return;
+}
+
+void listAppend(List* listDescriber, void* e){
     //Crete new element of the list
     ListElem *newOne = malloc(sizeof(ListElem));
     newOne->e = e;

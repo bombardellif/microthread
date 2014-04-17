@@ -22,7 +22,8 @@ typedef struct SListElem{
 } ListElem;
 
 List* newList(List* listDescriber);
-void listAdd(List* listDescriber, void* e);
+void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*));
+void listAppend(List* listDescriber, void* e);
 void* listGet(List* listDescriber, void* e, int (*comparator) (void*, void*));
 void listRemove(List* listDescriber, void* e, int (*comparator) (void*, void*));
 

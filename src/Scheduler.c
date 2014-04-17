@@ -37,7 +37,7 @@ void addThread(Tcb* tcb){
     if (threadList == NULL){
         newList(threadList);
     }
-    listAdd(threadList, tcb, tcbCompare);
+    listAppend(threadList, tcb);
 }
 
 /**
