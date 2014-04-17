@@ -27,6 +27,8 @@ Tcb* createTcb(uth_id id, ucontext_t context) {
     
     newTcb->id = id;
     newTcb->context = context;
+    newTcb->waitingThId = NULL;
+    newTcb->executedTime = 0;
     
     return newTcb;
 }

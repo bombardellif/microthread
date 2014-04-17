@@ -5,8 +5,8 @@
  * VERSÃO 1 - 20/03/2014
  */
 
-#include "Tcb.h"
-
+#define TRUE 1
+#define FALSE 0
 
 typedef int uth_id;
 typedef char boolean;
