@@ -111,7 +111,7 @@ void changeStateToReady(Tcb* tcbToChange) {
 
 boolean changeStateToWaiting(Tcb* tcbToDepend) {
     if (tcbToDepend->waitingThId) {
-        return False;
+        return FALSE;
     } else {
         if (yielding && tcbToDepend) {
             tcbToDepend->waitingThId = executingThread->id;

@@ -10,8 +10,6 @@
 
 typedef int uth_id;
 typedef char boolean;
-#define True 1;
-#define False 0;
 
 
 typedef struct Smmutex_t{
