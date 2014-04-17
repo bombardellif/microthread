@@ -9,6 +9,7 @@
 #include "Tcb.h"
 #include <ucontext.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include <assert.h>
 
@@ -43,20 +44,33 @@ void addThread(Tcb* tcb){
  * Schedule processes, choose a new ready thread to run on CPU, assume that the last executed thread was succesfully taken out from the CPU and had its context and statistics saved.
  * If there is no ready thread ...
  */
-void schedule(){
-    if (readyQueue == NULL){
-        return;
+void schedule(){    
+    //Only schedule if scheduler is in yield state, 
+    if (yielding == TRUE){    
+        //Yield is false now, it means that we are about finish the scheduling. 
+        //After the next thread finishes the processing maybe pass through this function, but we don't want to reschedule, therefore, set yield to false.
+        setYielding(FALSE);
+        
+        //No ready thread available, nothing to do
+        if (readyQueue == NULL){
+            executingThread = NULL;
+            return;
+        }
+        
+        //Take the next thread from the ready queue
+        Tcb* nextToRun = dequeue(readyQueue);
+
+        //There might have come something
+        assert(nextToRun != NULL);
+
+        executingThread = nextToRun;
+        
+        time(&(nextToRun->initialTime));
+        
+        //Call the thread. Note it will not return back here, because the thread has another context. It will return to the return context sat in its structure.
+        setcontext(&(nextToRun->context));
+        
     }
-    //Take the next thread from the ready queue
-    Tcb* nextToRun = dequeue(readyQueue);
-    
-    //There might have come something
-    assert(nextToRun != NULL);
-    
-    setInitialTime(nextToRun, now);
-    
-    //Call the thread. Note it will not return here, because the thread has another context. It will return to the return context sat in its structure.
-    
 }
 
 
