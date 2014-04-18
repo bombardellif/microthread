@@ -35,5 +35,6 @@ Tcb* createTcb(uth_id id, ucontext_t context) {
 
 void freeTcb(Tcb* tcb) {
     free(tcb);
+    tcb = NULL;
 }
 

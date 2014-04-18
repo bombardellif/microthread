@@ -12,9 +12,10 @@
 #include <time.h>
 
 #include <assert.h>
+#include <stdio.h>
 
-static OrderedQueue readyQueue = NULL;
-static List threadList = NULL;
+static OrderedQueue* readyQueue = NULL;
+static List* threadList = NULL;
 static Tcb* executingThread = NULL;
 static boolean yielding;
 static ucontext_t terminateContext;
@@ -33,16 +34,13 @@ void setYielding(boolean yield) {
  * @param tcb Thread Control Block related to the thread to be inserted
  */
 void addThread(Tcb* tcb){
-    //Initialize the list, if hasn't been yet
-    if (threadList == NULL){
-        newList(threadList);
-    }
+    assert(tcb != NULL);
     listAppend(threadList, tcb);
 }
 
 /**
  * Schedule processes, choose a new ready thread to run on CPU, assume that the last executed thread was succesfully taken out from the CPU and had its context and statistics saved.
- * If there is no ready thread ...
+ * If there is no ready thread, then exit program with failure signal
  */
 void schedule(){    
     //Only schedule if scheduler is in yield state, 
@@ -51,18 +49,20 @@ void schedule(){
         //After the next thread finishes the processing maybe pass through this function, but we don't want to reschedule, therefore, set yield to false.
         setYielding(FALSE);
         
+        assert(readyQueue != NULL);
+        
         //No ready thread available, nothing to do
-        if (readyQueue == NULL){
-            executingThread = NULL;
-            return;
+        if (OrderedQueueEmpty(readyQueue)){
+            sprintf(stderr,NOTHING_EXECUTE_ERRMSG);
+            exit(EXIT_FAILURE);
         }
         
         //Take the next thread from the ready queue
-        Tcb* nextToRun = dequeue(readyQueue);
+        Tcb* nextToRun = (Tcb*)dequeue(readyQueue);
 
         //There might have come something
         assert(nextToRun != NULL);
-
+        
         executingThread = nextToRun;
         
         time(&(nextToRun->initialTime));
@@ -125,7 +125,12 @@ boolean changeStateToWaiting(Tcb* tcbToDepend) {
  * @return The pointer to the thread with id = th, returns NULL if such was not found
  */
 Tcb* getThreadById(uth_id th){
-    listGet(threadList, &th, intPointerCompare);
+    assert(th >= 0);
+    
+    Tcb stubThread;
+    stubThread.id = th;
+    
+    return (Tcb*)listGet(threadList, &stubThread, tcbCompare);
 }
 
 /**
