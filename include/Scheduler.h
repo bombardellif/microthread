@@ -15,16 +15,16 @@
 typedef enum {Ready, Waiting, Running} State;
 
 void setYielding(boolean yield);
-void schedule();
+void schedule(void);
 void addThread(Tcb* tcb);
-void saveContext();
+void saveContext(void);
 void changeStateToReady(Tcb* tcbToChange);
 boolean changeStateToWaiting(Tcb* tcbToDepend);
 Tcb* getThreadById(uth_id th);
-ucontext_t* getTerminateContext();
-void terminateThread();
-Tcb* getExecutingThread();
-void initialize();
+ucontext_t* getTerminateContext(void);
+void terminateThread(void);
+Tcb* getExecutingThread(void);
+void initialize(void);
 
 
 #endif	/* SCHEDULER_H */
