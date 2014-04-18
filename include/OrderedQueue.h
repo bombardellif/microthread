@@ -14,8 +14,8 @@
 typedef List OrderedQueue;
 
 OrderedQueue* newOrderedQueue(OrderedQueue* queue);
-void enqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*));
-void* dequeue(OrderedQueue* queue);
+void orderedQueueEnqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*));
+void* orderedQueueDequeue(OrderedQueue* queue);
 
 #endif	/* ORDEREDQUEUE_H */
 

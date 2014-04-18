@@ -54,13 +54,13 @@ void schedule(){
         assert(readyQueue != NULL);
         
         //No ready thread available, nothing to do
-        if (OrderedQueueEmpty(readyQueue)){
+        if (orderedQueueEmpty(readyQueue)){
             sprintf(stderr,NOTHING_EXECUTE_ERRMSG);
             exit(EXIT_FAILURE);
         }
         
         //Take the next thread from the ready queue
-        Tcb* nextToRun = (Tcb*)dequeue(readyQueue);
+        Tcb* nextToRun = (Tcb*)orderedQueueDequeue(readyQueue);
 
         //There might have come something
         assert(nextToRun != NULL);
@@ -107,7 +107,7 @@ void changeStateToReady(Tcb* tcbToChange) {
 
     // enqueues the thread in the ready prioriry queue, if tcbToChange is null, then
     // enqueue the TCB of the current executing thread
-    enqueue(readyQueue, (tcbToChange) ? tcbToChange : executingThread, executedTimeTcbCompare);
+    orderedQueueEnqueue(readyQueue, (tcbToChange) ? tcbToChange : executingThread, executedTimeTcbCompare);
 }
 
 /**

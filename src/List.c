@@ -113,7 +113,7 @@ void listAppend(List* listDescriber, void* e){
     return;
 }
 
-void* getElement(List* listDescriber, void* e, int (*comparator) (void*, void*)){
+void* listGetElement(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     assert(listDescriber != NULL);
     assert(e != NULL);
     assert(comparator != NULL);
@@ -146,7 +146,7 @@ void* listGet(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     
     ListElem *el;
     //Look for the target element
-    if ((el = getElement(e, comparator)) != NULL){
+    if ((el = listGetElement(e, comparator)) != NULL){
         //If found return just the important data
         return el->e;
     }else{
@@ -161,7 +161,7 @@ void listRemove(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     
     ListElem *removing;
     //If we have found the one we want to remove
-    if ((removing = getElement(e, comparator)) != NULL){
+    if ((removing = listGetElement(e, comparator)) != NULL){
         //If we remove the first
         if (removing->prev == NULL)
             listDescriber->begin = removing->next; //Change the begin

@@ -15,15 +15,15 @@ OrderedQueue* newOrderedQueue(OrderedQueue* queue){
     return queue;
 }
 
-boolean OrderedQueueEmpty(OrderedQueue* queue){
+boolean orderedQueueEmpty(OrderedQueue* queue){
     return queue->begin == NULL ? TRUE : FALSE;
 }
 
-void enqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*)){
+void orderedQueueEnqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*)){
     listAdd(queue, e, comparator);
 }
 
-void* dequeue(OrderedQueue* queue){
+void* orderedQueueDequeue(OrderedQueue* queue){
     assert(queue != NULL);
     
     ListElem *removing;

@@ -24,7 +24,7 @@ void setFlag(mmutex_t* mutex, MutexFlag flag){
 void addToWaitingQueue(mmutex_t* mutex, uth_id* th){
     assert(mutex != NULL);
     
-    enqueue(mutex->waitingQueue, th, intPointerCompare);
+    orderedQueueEnqueue(mutex->waitingQueue, th, intPointerCompare);
 }
 
 MutexFlag getFlag(mmutex_t* mutex){
@@ -32,7 +32,7 @@ MutexFlag getFlag(mmutex_t* mutex){
 }
 
 uth_id* getFromWaitingQueue(mmutex_t* mutex){
-    return (uth_id*)dequeue(mutex->waitingQueue);
+    return (uth_id*)orderedQueueDequeue(mutex->waitingQueue);
 }
 
 /**
