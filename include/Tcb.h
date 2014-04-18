@@ -9,14 +9,15 @@
 #define	TCB_H
 
 #include <ucontext.h>
+#include <time.h>
 #include "mdata.h"
 
 typedef struct {
     uth_id id;
     uth_id waitingThId;
     ucontext_t context;
-    long executedTime;
-    long initialTime;
+    unsigned long executedTime;
+    time_t initialTime;
 } Tcb;
 
 Tcb* createTcb(uth_id id, ucontext_t context);

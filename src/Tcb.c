@@ -20,6 +20,18 @@ int tcbCompare(Tcb* a, Tcb* b){
     return (a->id == b->id) ? 0 : ((a->id > b->id) ? 1 : -1);
 }
 
+/**
+ * Compare the time of execution of two TCBs, return 0 (Zero) if both are equals,
+ * returns a number greater than 0 if a's time is greater than b's, or returns
+ * a number less than 0 if b's time is greater than a's one.
+ * @param a
+ * @param b
+ * @return int  0 if equal, greater than 0 if a>b, less than 0 else
+ */
+int executedTimeTcbCompare(Tcb* a, Tcb* b) {
+    return a->executedTime - b->executedTime;
+}
+
 Tcb* createTcb(uth_id id, ucontext_t context) {
     Tcb *newTcb;
     
