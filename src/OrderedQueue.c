@@ -6,13 +6,18 @@
  */
 
 #include "OrderedQueue.h"
-#include "mdata.h"
 #include <assert.h>
+#include <stdlib.h>
 
 
 OrderedQueue* newOrderedQueue(OrderedQueue* queue){
     queue = (OrderedQueue*) malloc(sizeof(OrderedQueue));
     return queue;
+}
+
+void freeOrderedQueue(OrderedQueue* queue){
+    free(queue);
+    queue = NULL;
 }
 
 boolean orderedQueueEmpty(OrderedQueue* queue){

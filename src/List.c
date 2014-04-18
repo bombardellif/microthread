@@ -5,8 +5,9 @@
  * Created on April 16, 2014, 00:13 AM
  */
 
-#include "List.h"
+#include <stdlib.h>
 #include <assert.h>
+#include "List.h"
 
 List* newList(List* listDescriber){
     listDescriber = (List*)malloc(sizeof(List));
@@ -18,6 +19,40 @@ List* newList(List* listDescriber){
 void freeList(List* listDescriber){
     free(listDescriber);
     listDescriber = NULL;
+}
+
+void listCheckRep(List* listDescriber){
+    assert(listDescriber);
+    assert(listDescriber->begin == NULL ? listDescriber->end == NULL : TRUE);
+    
+    if (listDescriber->begin){
+        int size = 0;
+        //Iterate over the list, counting
+        ListElem *current = listDescriber->begin;
+        while(current != NULL){
+            size++;
+            //move forward
+            current = current->next;
+        }
+        
+        if (size == 0){
+            assert(listDescriber->begin == NULL);
+            assert(listDescriber->end == NULL);
+        }else{
+            if (size == 1)
+                assert(listDescriber->begin == listDescriber->end);
+            else{
+                if (size==2){
+                    assert(listDescriber->begin->next == listDescriber->end);
+                    assert(listDescriber->end->prev == listDescriber->begin);
+                }
+                assert(listDescriber->begin->next);
+                assert(listDescriber->end->prev);
+            }
+            assert(listDescriber->begin->prev == NULL);
+            assert(listDescriber->begin->next == NULL);
+        }
+    }
 }
 
 
@@ -44,7 +79,7 @@ void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*)){
         newOne->prev = NULL;
     }else{
         //Iterate over the list, searching
-        ListElem *current = &(listDescriber->begin);
+        ListElem *current = listDescriber->begin;
         while(current != NULL){
             //Comparator returns greater than 0 iff e is greater than current->e
             if ((*comparator)(e, current->e) > 0){
@@ -124,7 +159,7 @@ void* listGetElement(List* listDescriber, void* e, int (*comparator) (void*, voi
         return NULL;
     }else{
         //Iterate over the list, searching
-        ListElem *current = &(listDescriber.begin);
+        ListElem *current = listDescriber->begin;
         while(current != NULL){
             //Comparator returns 0 iff e is equals to current->e
             if (!(*comparator)(e, current->e)){
@@ -146,7 +181,7 @@ void* listGet(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     
     ListElem *el;
     //Look for the target element
-    if ((el = listGetElement(e, comparator)) != NULL){
+    if ((el = listGetElement(listDescriber, e, comparator)) != NULL){
         //If found return just the important data
         return el->e;
     }else{
@@ -161,7 +196,7 @@ void listRemove(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     
     ListElem *removing;
     //If we have found the one we want to remove
-    if ((removing = listGetElement(e, comparator)) != NULL){
+    if ((removing = listGetElement(listDescriber, e, comparator)) != NULL){
         //If we remove the first
         if (removing->prev == NULL)
             listDescriber->begin = removing->next; //Change the begin

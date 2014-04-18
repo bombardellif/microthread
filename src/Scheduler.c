@@ -55,7 +55,7 @@ void schedule(){
         
         //No ready thread available, nothing to do
         if (orderedQueueEmpty(readyQueue)){
-            sprintf(stderr,NOTHING_EXECUTE_ERRMSG);
+            fprintf(stderr, NOTHING_EXECUTE_ERRMSG);
             exit(EXIT_FAILURE);
         }
         

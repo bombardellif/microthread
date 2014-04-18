@@ -5,6 +5,9 @@
  * VERSÃO 1 - 20/03/2014
  */
 
+#ifndef MDATA_H
+#define	MDATA_H
+
 #define TRUE 1
 #define FALSE 0
 #define ERR_MCREATE -1
@@ -13,8 +16,26 @@
 typedef int uth_id;
 typedef char boolean;
 
+typedef struct SListElem ListElem;
+
+struct SListElem{
+    void *e;
+    ListElem *prev;
+    ListElem *next;
+};
+
+typedef struct SListDesc{
+    ListElem *begin;
+    ListElem *end;
+} List;
+
+//"Extends" List
+typedef List OrderedQueue;
+
 
 typedef struct Smmutex_t{
     int flag;
     OrderedQueue* waitingQueue;
 } mmutex_t;
+
+#endif

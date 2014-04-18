@@ -8,20 +8,11 @@
 #ifndef LIST_H
 #define	LIST_H
 
-#include <stdlib.h>
-
-typedef struct SListDesc{
-    ListElem *begin;
-    ListElem *end;
-} List;
-
-typedef struct SListElem{
-    void *e;
-    ListElem *prev;
-    ListElem *next;
-} ListElem;
+#include "mdata.h"
 
 List* newList(List* listDescriber);
+void freeList(List* listDescriber);
+void listCheckRep(List* listDescriber);
 void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*));
 void listAppend(List* listDescriber, void* e);
 void* listGet(List* listDescriber, void* e, int (*comparator) (void*, void*));
