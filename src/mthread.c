@@ -8,10 +8,13 @@
 #include "mdata.h"
 #include <ucontext.h>
 #include <stdlib.h>
+#include <assert.h>
 
 static uth_id lastThreadId = 0;
 
 int mcreate (void (*start_routine)(void*), void *arg){
+    assert(start_routine != NULL);
+    
     //Creates the context and initialize it just to get a model
     ucontext_t newContext;
     getcontext(&newContext);
@@ -23,6 +26,17 @@ int mcreate (void (*start_routine)(void*), void *arg){
     makecontext(newContext, start_routine, 1, arg);
     
     Tcb* newThread = createTcb(lastThreadId+1, newContext);
+    assert(newThread != NULL);
     
-    addThread(newThread);
+    //Success
+    if (newThread != NULL){
+        //Control of ids
+        lastThreadId++;
+        
+        addThread(newThread);
+        
+        return lastThreadId;
+    }else{
+        return ERR_MCREATE;
+    }
 }
