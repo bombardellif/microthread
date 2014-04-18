@@ -248,3 +248,26 @@ void initialize() {
         newOrderedQueue(readyQueue);
     }
 }
+
+/**
+ * Initializes the Scheduler if it has not been yet.
+ * This function does the following:
+ *  Creates a TCB for the main thread with Id = 0, which must be
+ *      the one executing at the moment.
+ *  Creates the list of threads.
+ */
+void initialize() {
+    if (!executingThread) {
+        // Get the Context of the main thread
+        ucontext_t mainContext;
+        getcontext(&mainContext);
+        
+        Tcb* mainThread = createTcb(0, mainContext);
+        
+        addThread(mainThread);
+        
+        // Creates the list of threads
+        newList(threadList);
+        newOrderedQueue(readyQueue);
+    }
+}

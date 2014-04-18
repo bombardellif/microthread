@@ -7,18 +7,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/src/mthread.c</file>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/include/Tcb.h</file>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/include/mdata.h</file>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/include/mthread.h</file>
             <file>file:/home/fernando/NetBeansProjects/libmthread/src/Tcb.c</file>
             <file>file:/home/fernando/NetBeansProjects/libmthread/include/Scheduler.h</file>
+            <file>file:/home/fernando/NetBeansProjects/libmthread/include/mdata.h</file>
+            <file>file:/home/fernando/NetBeansProjects/libmthread/include/Tcb.h</file>
             <file>file:/home/fernando/NetBeansProjects/libmthread/src/Scheduler.c</file>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/src/List.c</file>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/include/List.h</file>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/include/OrderedQueue.h</file>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/src/OrderedQueue.c</file>
-            <file>file:/home/fernando/NetBeansProjects/libmthread/src/mmutex_t.c</file>
         </group>
     </open-files>
 </project-private>
