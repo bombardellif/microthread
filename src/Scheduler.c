@@ -23,7 +23,7 @@ static ucontext_t terminateContext;
 
 
 /**
- * Essa função altera o estado de yielding do escalonador (Verdadeiro ou Falso)
+ * This function changes the state yielding of the scheduler (True or false)
  * @param yield
  */
 void setYielding(boolean yield) {
@@ -76,8 +76,7 @@ void schedule(){
 }
 
 /**
- * Esse procedimento deve salvar o contexto atual na TCB da thread em execução.
- * 
+ * This function saves the current context in the TCB of the executing thread.
  */
 void saveContext() {
     // assertion
@@ -91,8 +90,6 @@ void saveContext() {
  * history and moving it to the ready queue of the scheduler.
  * Note-1: If null is sent in the parameter, then the function changes the state
  * of the current executing thread.
- * Note-2: If the parameter informed is NULL and the scheduler is not in its
- * state of yielding, then the call of this function has no effect.
  * @param tcbToChange
  */
 void changeStateToReady(Tcb* tcbToChange) {
@@ -101,16 +98,27 @@ void changeStateToReady(Tcb* tcbToChange) {
     assert(readyQueue != NULL);
     
     // calculates the total of time executing by the thread
-    if (executingThread->initialTime)
-        executingThread->executedTime = executingThread->initialTime - time(NULL);
-    else
-        executingThread->executedTime = 0;
+    if (!tcbToChange) {
+        if (executingThread->initialTime)
+            executingThread->executedTime = executingThread->initialTime - time(NULL);
+        else
+            executingThread->executedTime = 0;
+    }
 
     // enqueues the thread in the ready prioriry queue, if tcbToChange is null, then
     // enqueue the TCB of the current executing thread
-    enqueue(&readyQueue, (tcbToChange) ? tcbToChange : executingThread, executedTimeTcbCompare);
+    enqueue(readyQueue, (tcbToChange) ? tcbToChange : executingThread, executedTimeTcbCompare);
 }
 
+/**
+ * Change the state of the given Thread to Wainting by updating its execution time
+ * history and binding this thread to the thread to depend upon.
+ * The return is TRUE if the thread was successfully blocked, or FALSE, in the case
+ * it was not possible to bind the executiing thread to the one to depend upon.
+ * Note-1: If null is sent in the parameter, then the function does nothing.
+ * @param tcbToDepend
+ * @return boolean TRUE in case of success, FALSE otherwise.
+ */
 boolean changeStateToWaiting(Tcb* tcbToDepend) {
     
     if (tcbToDepend) {
@@ -118,10 +126,14 @@ boolean changeStateToWaiting(Tcb* tcbToDepend) {
             return FALSE;
         } else {
             assert(executingThread != NULL);
+            
+            // calculates the total of time executing by the thread
+            if (executingThread->initialTime)
+                executingThread->executedTime = executingThread->initialTime - time(NULL);
+            else
+                executingThread->executedTime = 0;
 
-            if (tcbToDepend) {
-                tcbToDepend->waitingThId = executingThread->id;
-            }
+            tcbToDepend->waitingThId = executingThread->id;
         }
     }
     
@@ -167,25 +179,67 @@ ucontext_t* getTerminateContext() {
 }
 
 /**
- * Retorna o TCB da thread em execução.
+ * Return the executing thread's TCB.
  * @return Tcb*
  */
 Tcb* getExecutingThread() {
     return executingThread;
 }
 
+/**
+ * This is the function responsable for destroying a thread. It is called implicitly
+ * when a thread (context) ends. Its duties are:
+ *  Move the thread that is blocked and wainting for this one to the ready queue (if there is).
+ *  Release all the resources used by this thread (remove from list, free memory)
+ *  Call the scheduler to execute another thread.
+ * 
+ * Note: This function does not return, since the context is swaped by the scheduler
+ */
 void terminateThread() {
+    Tcb stubTcb;
+    Tcb* waitingThread;
     
+    // assertions
+    assert(executingThread != NULL);
+    
+    // create a TCB just to search the waiting thread in the list
+    stubTcb.id = executingThread->waitingThId;
+    
+    // search the waiting thread and change its state to Ready
+    waitingThread = listGet(threadList, &stubTcb, tcbCompare);
+    if (!waitingThread) {
+        changeStateToReady(waitingThread);
+    }
+    
+    // relese the resources of this destroying thread
+    listRemove(threadList, executingThread, tcbCompare);
+    freeTcb(executingThread);
+    
+    schedule();
+    
+    // execution flow must never reach this point
+    assert(FALSE);
 }
 
+/**
+ * Initializes the Scheduler if it has not been yet.
+ * This function does the following:
+ *  Creates a TCB for the main thread with Id = 0, which must be
+ *      the one executing at the moment.
+ *  Creates the list of threads.
+ */
 void initialize() {
     if (!executingThread) {
-        //Just get the Context of the main thread
+        // Get the Context of the main thread
         ucontext_t mainContext;
         getcontext(&mainContext);
         
         Tcb* mainThread = createTcb(0, mainContext);
         
         addThread(mainThread);
+        
+        // Creates the list of threads
+        newList(threadList);
+        newOrderedQueue(readyQueue);
     }
 }
