@@ -44,7 +44,7 @@ void addThread(Tcb* tcb){
  * Schedule processes, choose a new ready thread to run on CPU, assume that the last executed thread was succesfully taken out from the CPU and had its context and statistics saved.
  * If there is no ready thread, then exit program with failure signal
  */
-void schedule(){    
+void schedule(void){
     //Only schedule if scheduler is in yield state, 
     if (yielding == TRUE){    
         //Yield is false now, it means that we are about finish the scheduling. 
@@ -78,7 +78,7 @@ void schedule(){
 /**
  * This function saves the current context in the TCB of the executing thread.
  */
-void saveContext() {
+void saveContext(void) {
     // assertion
     assert(executingThread != NULL);
     
@@ -159,7 +159,7 @@ Tcb* getThreadById(uth_id th){
  * thread.
  * @return ucontext_t*  Ponteiro para o contexto a executar ao finalizar thread.
  */
-ucontext_t* getTerminateContext() {
+ucontext_t* getTerminateContext(void) {
     ucontext_t tmpContext;
     
     // Se ainda não gerou o contexto, então o gera
@@ -187,7 +187,7 @@ ucontext_t* getTerminateContext() {
  * Return the executing thread's TCB.
  * @return Tcb*
  */
-Tcb* getExecutingThread() {
+Tcb* getExecutingThread(void) {
     return executingThread;
 }
 
@@ -200,7 +200,7 @@ Tcb* getExecutingThread() {
  * 
  * Note: This function does not return, since the context is swaped by the scheduler
  */
-void terminateThread() {
+void terminateThread(void) {
     Tcb stubTcb;
     Tcb* waitingThread;
     
@@ -233,7 +233,7 @@ void terminateThread() {
  *      the one executing at the moment.
  *  Creates the list of threads.
  */
-void initialize() {
+void initialize(void) {
     if (!executingThread) {
         // Get the Context of the main thread
         ucontext_t mainContext;
@@ -256,7 +256,7 @@ void initialize() {
  *      the one executing at the moment.
  *  Creates the list of threads.
  */
-void initialize() {
+void initialize(void) {
     if (!executingThread) {
         // Get the Context of the main thread
         ucontext_t mainContext;
