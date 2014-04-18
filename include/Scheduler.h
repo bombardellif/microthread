@@ -24,6 +24,7 @@ Tcb* getThreadById(uth_id th);
 ucontext_t* getTerminateContext();
 void terminateThread();
 Tcb* getExecutingThread();
+void initialize();
 
 
 #endif	/* SCHEDULER_H */

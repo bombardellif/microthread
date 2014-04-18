@@ -7,6 +7,8 @@
 
 #include "mdata.h"
 #include "Tcb.h"
+#include "List.h"
+#include "OrderedQueue.h"
 #include <ucontext.h>
 #include <stdlib.h>
 #include <time.h>
@@ -98,25 +100,32 @@ void changeStateToReady(Tcb* tcbToChange) {
     assert(executingThread != NULL);
     assert(readyQueue != NULL);
     
-    if (yielding || tcbToChange) {
-        
-        // calculates the total of time executing by the thread
+    // calculates the total of time executing by the thread
+    if (executingThread->initialTime)
         executingThread->executedTime = executingThread->initialTime - time(NULL);
+    else
+        executingThread->executedTime = 0;
 
-        // enqueues the thread in the ready prioriry queue, if tcbToChange is null, then
-        // enqueue the TCB of the current executing thread
-        enqueue(&readyQueue, (tcbToChange) ? tcbToChange : executingThread, executedTimeTcbCompare);
-    }
+    // enqueues the thread in the ready prioriry queue, if tcbToChange is null, then
+    // enqueue the TCB of the current executing thread
+    enqueue(&readyQueue, (tcbToChange) ? tcbToChange : executingThread, executedTimeTcbCompare);
 }
 
 boolean changeStateToWaiting(Tcb* tcbToDepend) {
-    if (tcbToDepend->waitingThId) {
-        return FALSE;
-    } else {
-        if (yielding && tcbToDepend) {
-            tcbToDepend->waitingThId = executingThread->id;
+    
+    if (tcbToDepend) {
+        if (tcbToDepend->waitingThId) {
+            return FALSE;
+        } else {
+            assert(executingThread != NULL);
+
+            if (tcbToDepend) {
+                tcbToDepend->waitingThId = executingThread->id;
+            }
         }
     }
+    
+    return TRUE;
 }
 
 /**
@@ -131,7 +140,7 @@ Tcb* getThreadById(uth_id th){
 /**
  * Retorna o struct do context que deve ser coloca a executar ao finalizar uma 
  * thread.
- * @return ucontext_t*  Ponteiro para o contexto a executar ao finlaizar thread.
+ * @return ucontext_t*  Ponteiro para o contexto a executar ao finalizar thread.
  */
 ucontext_t* getTerminateContext() {
     ucontext_t tmpContext;
@@ -154,7 +163,7 @@ ucontext_t* getTerminateContext() {
         }
     }
     
-    return terminateContext;
+    return &terminateContext;
 }
 
 /**
@@ -167,4 +176,16 @@ Tcb* getExecutingThread() {
 
 void terminateThread() {
     
+}
+
+void initialize() {
+    if (!executingThread) {
+        //Just get the Context of the main thread
+        ucontext_t mainContext;
+        getcontext(&mainContext);
+        
+        Tcb* mainThread = createTcb(0, mainContext);
+        
+        addThread(mainThread);
+    }
 }
