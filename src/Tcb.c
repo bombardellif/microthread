@@ -29,7 +29,7 @@ int tcbCompare(Tcb* a, Tcb* b){
  * @return int  0 if equal, greater than 0 if a>b, less than 0 else
  */
 int executedTimeTcbCompare(Tcb* a, Tcb* b) {
-    return a->executedTime - b->executedTime;
+    return (a->executedTime == b->executedTime) ? 0 : ((a->executedTime > b->executedTime) ? 1 : -1);
 }
 
 Tcb* createTcb(int id, ucontext_t context) {
