@@ -47,6 +47,8 @@ void addThread(Tcb* tcb){
  * If there is no ready thread, then exit program with failure signal
  */
 void schedule(void){
+    ucontext_t stubContext;
+    
     //Only schedule if scheduler is in yield state, 
     if (yielding == TRUE){    
         //Yield is false now, it means that we are about finish the scheduling. 
@@ -72,7 +74,8 @@ void schedule(void){
         clock_gettime(CLOCK_MONOTONIC, &(nextToRun->initialTime));
         
         //Call the thread. Note it will not return back here, because the thread has another context. It will return to the return context sat in its structure.
-        setcontext(&(nextToRun->context));
+        swapcontext(&stubContext, &(nextToRun->context));
+        //setcontext(&(nextToRun->context)); // this call fails in some cases. It was changed for swapcontext
         
     }
 }
