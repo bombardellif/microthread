@@ -203,6 +203,9 @@ void terminateThread(void) {
     Tcb stubTcb;
     Tcb* waitingThread;
     
+    ////Comentar tratamentos de Waiting Threads
+    ////Pode ser problema ao chamar main (testar fora)
+    
     // assertions
     assert(executingThread != NULL);
     
