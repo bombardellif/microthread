@@ -21,8 +21,8 @@
 static OrderedQueue* readyQueue = NULL;
 static List* threadList = NULL;
 static Tcb* executingThread = NULL;
-static boolean yielding;
-static ucontext_t* terminateContext;
+static boolean yielding = FALSE;
+static ucontext_t* terminateContext = NULL;
 
 
 /**
@@ -122,18 +122,18 @@ boolean changeStateToWaiting(Tcb* tcbToDepend) {
     
     if (tcbToDepend) {
         if (tcbToDepend->waitingThId == -1) {
-            return FALSE;
-        } else {
             assert(executingThread != NULL);
             
             // calculates the total of time executing by the thread
             executingThread->executedTime = calculateExecuteTime(executingThread);
 
             tcbToDepend->waitingThId = executingThread->id;
+            
+            return TRUE;
         }
     }
     
-    return TRUE;
+    return FALSE;
 }
 
 /**
@@ -172,6 +172,9 @@ ucontext_t* getTerminateContext(void) {
             // que coloca outro contexto a executar sem salvar o atual (que está finalizando)
             terminateThread();
         } else {
+            
+            // Allocate terminateContext struct
+            terminateContext = (ucontext_t*)malloc(sizeof(ucontext_t));
             *terminateContext = tmpContext;
         }
     }
@@ -230,10 +233,13 @@ void terminateThread(void) {
  *  Creates a TCB for the main thread with Id = 0, which must be
  *      the one executing at the moment.
  *  Creates the list of threads and the ready queue.
- *  Allocate the struct terminateContext
  */
 void initialize(void) {
     if (!executingThread) {
+        // Creates the list of threads
+        threadList = newList();
+        readyQueue = newOrderedQueue();
+        
         // Get the Context of the main thread
         ucontext_t mainContext;
         getcontext(&mainContext);
@@ -242,11 +248,7 @@ void initialize(void) {
         
         addThread(mainThread);
         
-        // Creates the list of threads
-        threadList = newList();
-        readyQueue = newOrderedQueue();
-        
-        terminateContext = (ucontext_t*)malloc(sizeof(ucontext_t));
+        executingThread = mainThread;
     }
 }
 

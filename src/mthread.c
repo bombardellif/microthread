@@ -17,6 +17,8 @@ static int lastThreadId = 0;
 int mcreate (void (*start_routine)(void*), void *arg){
     assert(start_routine != NULL);
     
+    initialize();
+    
     //Creates the context and initialize it just to get a model
     ucontext_t newContext;
     getcontext(&newContext);
@@ -36,6 +38,8 @@ int mcreate (void (*start_routine)(void*), void *arg){
         lastThreadId++;
         
         addThread(newThread);
+        
+        changeStateToReady(NULL);
         
         return lastThreadId;
     }else{
@@ -71,22 +75,24 @@ int mjoin(int thr) {
         
         successBlocking = changeStateToWaiting(threadToWaitFor);
         
-        saveContext();
-        
-        // When the thread will be unblocked, it will continue executing HERE
-        // but the scheduler won't schedule, hence this following call will do nothing
-        schedule();
-        
-        // return 0 in case of success, or -1 otherwise
-        return (successBlocking) ? 0 : -1;
-    } else {
-    // it wasn't possible to find thr, then return -1
-    
-        return -1;
+        if (successBlocking) {
+            saveContext();
+
+            // When the thread will be unblocked, it will continue executing HERE
+            // but the scheduler won't schedule, hence this following call will do nothing
+            schedule();
+            
+            return 0;
+        }
     }
+    
+    // return 0 in case of success, or -1 otherwise
+    return -1;
 }
 
 int mmutex_init(mmutex_t *mutex) {
+    
+    initialize();
     
     newmmutex_t(mutex);
     
@@ -127,6 +133,8 @@ int mlock (mmutex_t *mutex) {
 
 int munlock (mmutex_t *mutex) {
     Tcb *targetThread;
+    
+    initialize();
     
     if (mutex && (mutex->flag == Locked)) {
         

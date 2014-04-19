@@ -40,7 +40,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Scheduler.o \
 	${OBJECTDIR}/src/Tcb.o \
 	${OBJECTDIR}/src/mmutex_t.o \
-	${OBJECTDIR}/src/mthread.o
+	${OBJECTDIR}/src/mthread.o \
+	${OBJECTDIR}/src/teste.o
 
 
 # C Compiler Flags
@@ -98,6 +99,11 @@ ${OBJECTDIR}/src/mthread.o: src/mthread.c
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/mthread.o src/mthread.c
+
+${OBJECTDIR}/src/teste.o: src/teste.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/teste.o src/teste.c
 
 # Subprojects
 .build-subprojects:

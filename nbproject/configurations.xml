@@ -25,6 +25,7 @@
       <itemPath>src/Tcb.c</itemPath>
       <itemPath>src/mmutex_t.c</itemPath>
       <itemPath>src/mthread.c</itemPath>
+      <itemPath>src/teste.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -87,6 +88,8 @@
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="src/teste.c" ex="false" tool="0" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="3">
       <toolsSet>
@@ -135,6 +138,56 @@
       <item path="src/mmutex_t.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/teste.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+    <conf name="AppDebug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+          <warningLevel>2</warningLevel>
+        </cTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>-lrt</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="include/List.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/OrderedQueue.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Scheduler.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Tcb.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mdata.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mmutex_t.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mthread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/List.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/OrderedQueue.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/Scheduler.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/Tcb.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/mmutex_t.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/teste.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
   </confs>
