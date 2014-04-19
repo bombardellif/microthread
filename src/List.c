@@ -34,6 +34,7 @@ void listCheckRep(List* listDescriber){
             //move forward
             current = current->next;
         }
+        printf("%d",size);
         
         if (size == 0){
             assert(listDescriber->begin == NULL);
@@ -50,8 +51,10 @@ void listCheckRep(List* listDescriber){
                 assert(listDescriber->end->prev);
             }
             assert(listDescriber->begin->prev == NULL);
-            assert(listDescriber->begin->next == NULL);
+            assert(listDescriber->end->next == NULL);
         }
+    }else{
+        printf("%d",0);
     }
 }
 
@@ -80,8 +83,8 @@ void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*)){
         //Iterate over the list, searching
         ListElem *current = listDescriber->begin;
         while(current != NULL){
-            //Comparator returns greater than 0 iff e is greater than current->e
-            if ((*comparator)(e, current->e) > 0){
+            //Comparator returns greater than 0 iff current->e is greater than e
+            if ((*comparator)(current->e, e) > 0){
                 break;
             }
             //move forward
@@ -94,6 +97,8 @@ void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*)){
             //Put pointers in order, note we add the new one to the end
             listDescriber->end->next = newOne;
             newOne->prev = listDescriber->end;
+            listDescriber->end = newOne;
+            newOne->next = NULL;
 
         }else{ //Found a place inside the list to insert e
 
@@ -105,6 +110,7 @@ void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*)){
             //Inserting in the first position?
             if (listDescriber->begin == current){
                 listDescriber->begin = newOne;
+                newOne->prev = NULL;
             }else{
                 assert(newOne->prev != NULL);
                 newOne->prev->next = newOne;
@@ -140,6 +146,8 @@ void listAppend(List* listDescriber, void* e){
         //Put pointers in order, note we add the new one to the end
         listDescriber->end->next = newOne;
         newOne->prev = listDescriber->end;
+        listDescriber->end = newOne;
+        newOne->next = NULL;
     }
     
     newOne->next = NULL;
