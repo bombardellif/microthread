@@ -243,8 +243,8 @@ void initialize(void) {
         addThread(mainThread);
         
         // Creates the list of threads
-        newList(threadList);
-        newOrderedQueue(readyQueue);
+        threadList = newList();
+        readyQueue = newOrderedQueue();
         
         terminateContext = (ucontext_t*)malloc(sizeof(ucontext_t));
     }

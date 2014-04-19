@@ -9,8 +9,8 @@
 #include <assert.h>
 #include "List.h"
 
-List* newList(List* listDescriber){
-    listDescriber = (List*)malloc(sizeof(List));
+List* newList(){
+    List* listDescriber = (List*)malloc(sizeof(List));
     listDescriber->begin = NULL;
     listDescriber->end = NULL;
     return listDescriber;

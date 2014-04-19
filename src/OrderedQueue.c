@@ -12,8 +12,8 @@
 #include <assert.h>
 
 
-OrderedQueue* newOrderedQueue(OrderedQueue* queue){
-    queue = (OrderedQueue*) malloc(sizeof(OrderedQueue));
+OrderedQueue* newOrderedQueue(){
+    OrderedQueue* queue = (OrderedQueue*) malloc(sizeof(OrderedQueue));
     return queue;
 }
 
