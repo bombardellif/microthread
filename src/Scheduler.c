@@ -250,6 +250,14 @@ void initialize(void) {
     }
 }
 
+/**
+ * If the informed thread has an initialized "initialTiem", then returns the
+ * diference of time in nanoseconds between the informed thread and "now".
+ * Else, returns 0.
+ * @param thread
+ * @return ulong    0 if thread has no initialTime set, or the diference between
+ *                  the thread initialTime and now.
+ */
 unsigned long calculateExecuteTime(Tcb* thread) {
     struct timespec now;
     
