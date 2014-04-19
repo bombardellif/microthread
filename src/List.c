@@ -79,6 +79,7 @@ void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*)){
         listDescriber->end   = newOne;
         //new one is the first, hence the previous is null
         newOne->prev = NULL;
+        newOne->next = NULL;
     }else{
         //Iterate over the list, searching
         ListElem *current = listDescriber->begin;
@@ -162,7 +163,7 @@ void* listGetElement(List* listDescriber, void* e, int (*comparator) (void*, voi
     
     //If the list is empty
     if (listDescriber->begin == NULL){
-        assert(listDescriber->end != NULL);
+        assert(listDescriber->end == NULL);
         return NULL;
     }else{
         //Iterate over the list, searching

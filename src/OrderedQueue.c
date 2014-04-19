@@ -14,6 +14,8 @@
 
 OrderedQueue* newOrderedQueue(){
     OrderedQueue* queue = (OrderedQueue*) malloc(sizeof(OrderedQueue));
+    queue->begin = NULL;
+    queue->end = NULL;
     return queue;
 }
 
