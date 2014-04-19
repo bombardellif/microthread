@@ -1,14 +1,15 @@
 /*
- * File:   ListTest.c
+ * File:   testList.c
  * Author: william
  *
- * Created on Apr 18, 2014, 6:00:56 PM
+ * Created on Apr 18, 2014, 9:44:31 PM
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "CUnit/Basic.h"
-#include "List.h"
+#include "../include/List.h"
+#include "../include/mmutex_t.h"
 
 /*
  * CUnit Test Suite
@@ -22,35 +23,49 @@ int clean_suite(void) {
     return 0;
 }
 
-void testCheckRep() {
+void testFreeList() {
     List* listDescriber;
-    boolean result = listCheckRep(listDescriber);
+    //freeList(listDescriber);
     if (1 /*check result*/) {
         CU_ASSERT(0);
     }
 }
 
-void testFreeList() {
+void testListCheckRep() {
     List* listDescriber;
-    freeList(listDescriber);
+    newList(listDescriber);
+    listCheckRep(listDescriber);
     if (1 /*check result*/) {
         CU_ASSERT(0);
     }
 }
+
 
 void testListAdd() {
     List* listDescriber;
-    void* e;
+    int *e = malloc(sizeof(int));
+    *e = 1;
     listAdd(listDescriber, e, intPointerCompare);
     if (1 /*check result*/) {
         CU_ASSERT(0);
+        listCheckRep(listDescriber);
+        
+        int *f = malloc(sizeof(int));
+        *f = 2;
+        listAdd(listDescriber, f, intPointerCompare);
+        listCheckRep(listDescriber);
+        
+        int *g = malloc(sizeof(int));
+        *g = 0;
+        listAdd(listDescriber, g, intPointerCompare);
+        listCheckRep(listDescriber);
     }
 }
 
 void testListAppend() {
     List* listDescriber;
     void* e;
-    listAppend(listDescriber, e);
+    //listAppend(listDescriber, e);
     if (1 /*check result*/) {
         CU_ASSERT(0);
     }
@@ -59,7 +74,7 @@ void testListAppend() {
 void testListGet() {
     List* listDescriber;
     void* e;
-    void* result = listGet(listDescriber, e, intPointerCompare);
+    //void* result = listGet(listDescriber, e, intPointerCompare);
     if (1 /*check result*/) {
         CU_ASSERT(0);
     }
@@ -68,7 +83,7 @@ void testListGet() {
 void testListRemove() {
     List* listDescriber;
     void* e;
-    listRemove(listDescriber, e, intPointerCompare);
+    //listRemove(listDescriber, e, intPointerCompare);
     if (1 /*check result*/) {
         CU_ASSERT(0);
     }
@@ -84,16 +99,16 @@ void testNewList() {
     }
 }
 
-void* listGetElement(List* listDescriber, void* e, int(*comparator)(void*, void*));
 
 void testListGetElement() {
     List* listDescriber;
     void* e;
-    void* result = listGetElement(listDescriber, e, intPointerCompare);
+    //void* result = listGetElement(listDescriber, e, intPointerCompare);
     if (1 /*check result*/) {
         CU_ASSERT(0);
     }
 }
+
 
 int main() {
     CU_pSuite pSuite = NULL;
@@ -103,17 +118,17 @@ int main() {
         return CU_get_error();
 
     /* Add a suite to the registry */
-    pSuite = CU_add_suite("ListTest", init_suite, clean_suite);
+    pSuite = CU_add_suite("testList", init_suite, clean_suite);
     if (NULL == pSuite) {
         CU_cleanup_registry();
         return CU_get_error();
     }
 
     /* Add the tests to the suite */
-    if ((NULL == CU_add_test(pSuite, "testCheckRep", testCheckRep)) ||
-            (NULL == CU_add_test(pSuite, "testFreeList", testFreeList)) ||
+    if ((NULL == CU_add_test(pSuite, "testFreeList", testFreeList)) ||
             (NULL == CU_add_test(pSuite, "testListAdd", testListAdd)) ||
             (NULL == CU_add_test(pSuite, "testListAppend", testListAppend)) ||
+            (NULL == CU_add_test(pSuite, "testListCheckRep", testListCheckRep)) ||
             (NULL == CU_add_test(pSuite, "testListGet", testListGet)) ||
             (NULL == CU_add_test(pSuite, "testListRemove", testListRemove)) ||
             (NULL == CU_add_test(pSuite, "testNewList", testNewList)) ||
