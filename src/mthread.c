@@ -30,7 +30,6 @@ int mcreate (void (*start_routine)(void*), void *arg){
     makecontext(&newContext, (void(*)())start_routine, 1, arg);
     
     Tcb* newThread = createTcb(lastThreadId+1, newContext);
-    assert(newThread != NULL);
     
     //Success
     if (newThread != NULL){
