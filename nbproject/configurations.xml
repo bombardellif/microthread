@@ -58,6 +58,7 @@
           <warningLevel>2</warningLevel>
         </cTool>
         <archiverTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread.a</output>
         </archiverTool>
       </compileType>
       <item path="include/List.h" ex="false" tool="3" flavor2="0">

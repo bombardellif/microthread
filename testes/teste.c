@@ -5,7 +5,7 @@
  * Versão 1 - 20/03/2014
  */
 
-#include "./include/mthread.h" /*considera que este fonte está no diretório “testes” (vide seção 8)*/
+#include "mthread.h" /*considera que este fonte está no diretório testes (vide seção 8)*/
 
 void func0(void *arg) {
 
