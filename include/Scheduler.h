@@ -20,7 +20,7 @@ void addThread(Tcb* tcb);
 void saveContext(void);
 void changeStateToReady(Tcb* tcbToChange);
 boolean changeStateToWaiting(Tcb* tcbToDepend);
-Tcb* getThreadById(uth_id th);
+Tcb* getThreadById(int th);
 ucontext_t* getTerminateContext(void);
 void terminateThread(void);
 Tcb* getExecutingThread(void);

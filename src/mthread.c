@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-static uth_id lastThreadId = 0;
+static int lastThreadId = 0;
 
 int mcreate (void (*start_routine)(void*), void *arg){
     assert(start_routine != NULL);
@@ -25,7 +25,7 @@ int mcreate (void (*start_routine)(void*), void *arg){
     newContext.uc_stack.ss_sp = malloc(SIGSTKSZ);
     newContext.uc_stack.ss_size = SIGSTKSZ;
     
-    makecontext(newContext, start_routine, 1, arg);
+    makecontext(&newContext, (void(*)())start_routine, 1, arg);
     
     Tcb* newThread = createTcb(lastThreadId+1, newContext);
     assert(newThread != NULL);
@@ -67,7 +67,7 @@ int mjoin(int thr) {
     setYielding(TRUE);
     
     // search thread by id, if found, then block the current and schedule.
-    if (threadToWaitFor = getThreadById(thr)) {
+    if ((threadToWaitFor = getThreadById(thr))) {
         
         successBlocking = changeStateToWaiting(threadToWaitFor);
         
@@ -111,7 +111,7 @@ int mlock (mmutex_t *mutex) {
                 
                 setYielding(TRUE);
                 
-                addToWaitingQueue(mutex, execThread->id);
+                addToWaitingQueue(mutex, &execThread->id);
                 
                 saveContext();
                 
@@ -132,7 +132,7 @@ int munlock (mmutex_t *mutex) {
         
         setFlag(mutex, Free);
         
-        targetThread = getFromWaitingQueue(mutex);
+        targetThread = getThreadById(*(getFromWaitingQueue(mutex)));
         
         if (targetThread) {
             

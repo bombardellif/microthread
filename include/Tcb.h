@@ -13,15 +13,17 @@
 #include "mdata.h"
 
 typedef struct {
-    uth_id id;
-    uth_id waitingThId;
+    int id;
+    int waitingThId;
     ucontext_t context;
     unsigned long executedTime;
     time_t initialTime;
 } Tcb;
 
-Tcb* createTcb(uth_id id, ucontext_t context);
-int freeTcb(Tcb* tcb);
+int tcbCompare(Tcb* a, Tcb* b);
+int executedTimeTcbCompare(Tcb* a, Tcb* b);
+Tcb* createTcb(int id, ucontext_t context);
+void freeTcb(Tcb* tcb);
 
 #endif	/* TCB_H */
 

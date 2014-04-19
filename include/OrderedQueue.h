@@ -12,6 +12,7 @@
 
 OrderedQueue* newOrderedQueue(OrderedQueue* queue);
 void freeOrderedQueue(OrderedQueue* queue);
+boolean orderedQueueEmpty(OrderedQueue* queue);
 void orderedQueueEnqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*));
 void* orderedQueueDequeue(OrderedQueue* queue);
 

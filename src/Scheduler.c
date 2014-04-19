@@ -5,6 +5,7 @@
  * Created on 15. April 2014, 23:56
  */
 
+#include "Scheduler.h"
 #include "mdata.h"
 #include "Tcb.h"
 #include "List.h"
@@ -12,15 +13,16 @@
 #include <ucontext.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 #include <assert.h>
-#include <stdio.h>
+
 
 static OrderedQueue* readyQueue = NULL;
 static List* threadList = NULL;
 static Tcb* executingThread = NULL;
 static boolean yielding;
-static ucontext_t terminateContext;
+static ucontext_t* terminateContext;
 
 
 /**
@@ -107,7 +109,7 @@ void changeStateToReady(Tcb* tcbToChange) {
 
     // enqueues the thread in the ready prioriry queue, if tcbToChange is null, then
     // enqueue the TCB of the current executing thread
-    orderedQueueEnqueue(readyQueue, (tcbToChange) ? tcbToChange : executingThread, executedTimeTcbCompare);
+    orderedQueueEnqueue(readyQueue, ((tcbToChange) ? tcbToChange : executingThread), (int(*)(void*,void*))executedTimeTcbCompare);
 }
 
 /**
@@ -122,7 +124,7 @@ void changeStateToReady(Tcb* tcbToChange) {
 boolean changeStateToWaiting(Tcb* tcbToDepend) {
     
     if (tcbToDepend) {
-        if (tcbToDepend->waitingThId) {
+        if (tcbToDepend->waitingThId == -1) {
             return FALSE;
         } else {
             assert(executingThread != NULL);
@@ -145,13 +147,13 @@ boolean changeStateToWaiting(Tcb* tcbToDepend) {
  * @param th Id of the thread to be searched
  * @return The pointer to the thread with id = th, returns NULL if such was not found
  */
-Tcb* getThreadById(uth_id th){
+Tcb* getThreadById(int th){
     assert(th >= 0);
     
     Tcb stubThread;
     stubThread.id = th;
     
-    return (Tcb*)listGet(threadList, &stubThread, tcbCompare);
+    return (Tcb*)listGet(threadList, &stubThread,  (int(*)(void*,void*))tcbCompare);
 }
 
 /**
@@ -176,11 +178,11 @@ ucontext_t* getTerminateContext(void) {
             // que coloca outro contexto a executar sem salvar o atual (que está finalizando)
             terminateThread();
         } else {
-            terminateContext = tmpContext;
+            *terminateContext = tmpContext;
         }
     }
     
-    return &terminateContext;
+    return terminateContext;
 }
 
 /**
@@ -207,17 +209,19 @@ void terminateThread(void) {
     // assertions
     assert(executingThread != NULL);
     
-    // create a TCB just to search the waiting thread in the list
-    stubTcb.id = executingThread->waitingThId;
-    
-    // search the waiting thread and change its state to Ready
-    waitingThread = listGet(threadList, &stubTcb, tcbCompare);
-    if (!waitingThread) {
-        changeStateToReady(waitingThread);
+    if (executingThread->waitingThId != -1) {
+        // create a TCB just to search the waiting thread in the list
+        stubTcb.id = executingThread->waitingThId;
+
+        // search the waiting thread and change its state to Ready
+        waitingThread = listGet(threadList, (void*)&stubTcb,  (int(*)(void*,void*))tcbCompare);
+        if (!waitingThread) {
+            changeStateToReady(waitingThread);
+        }
     }
     
     // relese the resources of this destroying thread
-    listRemove(threadList, executingThread, tcbCompare);
+    listRemove(threadList, (void*)executingThread,  (int(*)(void*,void*))tcbCompare);
     freeTcb(executingThread);
     
     schedule();
@@ -231,7 +235,8 @@ void terminateThread(void) {
  * This function does the following:
  *  Creates a TCB for the main thread with Id = 0, which must be
  *      the one executing at the moment.
- *  Creates the list of threads.
+ *  Creates the list of threads and the ready queue.
+ *  Allocate the struct terminateContext
  */
 void initialize(void) {
     if (!executingThread) {
@@ -246,28 +251,7 @@ void initialize(void) {
         // Creates the list of threads
         newList(threadList);
         newOrderedQueue(readyQueue);
-    }
-}
-
-/**
- * Initializes the Scheduler if it has not been yet.
- * This function does the following:
- *  Creates a TCB for the main thread with Id = 0, which must be
- *      the one executing at the moment.
- *  Creates the list of threads.
- */
-void initialize(void) {
-    if (!executingThread) {
-        // Get the Context of the main thread
-        ucontext_t mainContext;
-        getcontext(&mainContext);
         
-        Tcb* mainThread = createTcb(0, mainContext);
-        
-        addThread(mainThread);
-        
-        // Creates the list of threads
-        newList(threadList);
-        newOrderedQueue(readyQueue);
+        terminateContext = (ucontext_t*)malloc(sizeof(ucontext_t));
     }
 }

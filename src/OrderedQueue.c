@@ -6,8 +6,10 @@
  */
 
 #include "OrderedQueue.h"
-#include <assert.h>
+#include "List.h"
 #include <stdlib.h>
+
+#include <assert.h>
 
 
 OrderedQueue* newOrderedQueue(OrderedQueue* queue){

@@ -32,14 +32,14 @@ int executedTimeTcbCompare(Tcb* a, Tcb* b) {
     return a->executedTime - b->executedTime;
 }
 
-Tcb* createTcb(uth_id id, ucontext_t context) {
+Tcb* createTcb(int id, ucontext_t context) {
     Tcb *newTcb;
     
     newTcb = (Tcb*)malloc(sizeof(Tcb));
     
     newTcb->id = id;
     newTcb->context = context;
-    newTcb->waitingThId = NULL;
+    newTcb->waitingThId = -1;
     newTcb->executedTime = 0;
     
     return newTcb;

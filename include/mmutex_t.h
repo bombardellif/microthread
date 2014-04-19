@@ -16,9 +16,10 @@ typedef enum {Locked, Free} MutexFlag;
 
 mmutex_t* newmmutex_t(mmutex_t* mutex);
 void setFlag(mmutex_t* mutex, MutexFlag flag);
-void addToWaitingQueue(mmutex_t* mutex, uth_id* th);
+void addToWaitingQueue(mmutex_t* mutex, int* th);
 MutexFlag getFlag(mmutex_t* mutex);
-uth_id* getFromWaitingQueue(mmutex_t* mutex);
+int* getFromWaitingQueue(mmutex_t* mutex);
+int intPointerCompare(int* a, int* b);
 
 #endif	/* MMUTEX_T_H */
 

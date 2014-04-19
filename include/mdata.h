@@ -13,7 +13,6 @@
 #define ERR_MCREATE -1
 #define NOTHING_EXECUTE_ERRMSG "Nothing to execute"
 
-typedef int uth_id;
 typedef char boolean;
 
 typedef struct SListElem ListElem;

@@ -55,6 +55,7 @@
           <incDir>
             <pElem>include</pElem>
           </incDir>
+          <warningLevel>2</warningLevel>
         </cTool>
         <archiverTool>
         </archiverTool>

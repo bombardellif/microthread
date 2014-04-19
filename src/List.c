@@ -55,7 +55,6 @@ void listCheckRep(List* listDescriber){
     }
 }
 
-
 void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*)){
     //Crete new element of the list
     ListElem *newOne = (ListElem*)malloc(sizeof(ListElem));

@@ -72,32 +72,32 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibmthread.a: ${OBJECTFILES}
 ${OBJECTDIR}/src/List.o: src/List.c 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/List.o src/List.c
+	$(COMPILE.c) -g -Wall -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/List.o src/List.c
 
 ${OBJECTDIR}/src/OrderedQueue.o: src/OrderedQueue.c 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/OrderedQueue.o src/OrderedQueue.c
+	$(COMPILE.c) -g -Wall -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/OrderedQueue.o src/OrderedQueue.c
 
 ${OBJECTDIR}/src/Scheduler.o: src/Scheduler.c 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Scheduler.o src/Scheduler.c
+	$(COMPILE.c) -g -Wall -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Scheduler.o src/Scheduler.c
 
 ${OBJECTDIR}/src/Tcb.o: src/Tcb.c 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Tcb.o src/Tcb.c
+	$(COMPILE.c) -g -Wall -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Tcb.o src/Tcb.c
 
 ${OBJECTDIR}/src/mmutex_t.o: src/mmutex_t.c 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/mmutex_t.o src/mmutex_t.c
+	$(COMPILE.c) -g -Wall -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/mmutex_t.o src/mmutex_t.c
 
 ${OBJECTDIR}/src/mthread.o: src/mthread.c 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/mthread.o src/mthread.c
+	$(COMPILE.c) -g -Wall -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/mthread.o src/mthread.c
 
 # Subprojects
 .build-subprojects:
