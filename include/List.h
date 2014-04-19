@@ -10,7 +10,7 @@
 
 #include "mdata.h"
 
-List* newList(List* listDescriber);
+List* newList();
 void freeList(List* listDescriber);
 void listCheckRep(List* listDescriber);
 void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*));

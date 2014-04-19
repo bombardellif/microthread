@@ -10,7 +10,7 @@
 
 #include "mdata.h"
 
-OrderedQueue* newOrderedQueue(OrderedQueue* queue);
+OrderedQueue* newOrderedQueue();
 void freeOrderedQueue(OrderedQueue* queue);
 boolean orderedQueueEmpty(OrderedQueue* queue);
 void orderedQueueEnqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*));

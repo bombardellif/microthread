@@ -13,7 +13,7 @@
 mmutex_t* newmmutex_t(mmutex_t* mutex){
     mutex = (mmutex_t*)malloc(sizeof(mmutex_t));
     mutex->flag = Free;
-    newOrderedQueue(mutex->waitingQueue);
+    mutex->waitingQueue = newOrderedQueue();
     return mutex;
 }
 
