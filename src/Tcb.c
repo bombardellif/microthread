@@ -49,6 +49,5 @@ Tcb* createTcb(int id, ucontext_t context) {
 
 void freeTcb(Tcb* tcb) {
     free(tcb);
-    tcb = NULL;
 }
 

@@ -39,7 +39,7 @@ int mcreate (void (*start_routine)(void*), void *arg){
         
         addThread(newThread);
         
-        changeStateToReady(NULL);
+        changeStateToReady(newThread);
         
         return lastThreadId;
     }else{

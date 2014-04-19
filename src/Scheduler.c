@@ -21,7 +21,7 @@
 static OrderedQueue* readyQueue = NULL;
 static List* threadList = NULL;
 static Tcb* executingThread = NULL;
-static boolean yielding = FALSE;
+static boolean yielding;
 static ucontext_t* terminateContext = NULL;
 
 
@@ -206,13 +206,15 @@ void terminateThread(void) {
     // assertions
     assert(executingThread != NULL);
     
+    setYielding(TRUE);
+    
     if (executingThread->waitingThId != -1) {
         // create a TCB just to search the waiting thread in the list
         stubTcb.id = executingThread->waitingThId;
 
         // search the waiting thread and change its state to Ready
         waitingThread = listGet(threadList, (void*)&stubTcb,  (int(*)(void*,void*))tcbCompare);
-        if (!waitingThread) {
+        if (waitingThread) {
             changeStateToReady(waitingThread);
         }
     }

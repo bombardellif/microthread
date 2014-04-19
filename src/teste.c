@@ -10,6 +10,7 @@
 void func0(void *arg) {
 
      /*corpo da função func0 */
+    myield();
 	 
      return;    /*termina a execução da thread via comando C */
 }
