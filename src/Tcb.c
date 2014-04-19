@@ -41,6 +41,8 @@ Tcb* createTcb(int id, ucontext_t context) {
     newTcb->context = context;
     newTcb->waitingThId = -1;
     newTcb->executedTime = 0;
+    newTcb->initialTime.tv_sec = 0;
+    newTcb->initialTime.tv_nsec = 0;
     
     return newTcb;
 }

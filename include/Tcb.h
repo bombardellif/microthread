@@ -17,7 +17,7 @@ typedef struct {
     int waitingThId;
     ucontext_t context;
     unsigned long executedTime;
-    time_t initialTime;
+    struct timespec initialTime;
 } Tcb;
 
 int tcbCompare(Tcb* a, Tcb* b);

@@ -25,6 +25,7 @@ ucontext_t* getTerminateContext(void);
 void terminateThread(void);
 Tcb* getExecutingThread(void);
 void initialize(void);
+unsigned long calculateExecuteTime(Tcb* thread);
 
 
 #endif	/* SCHEDULER_H */

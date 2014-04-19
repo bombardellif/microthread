@@ -69,7 +69,7 @@ void schedule(void){
         
         executingThread = nextToRun;
         
-        time(&(nextToRun->initialTime));
+        clock_gettime(CLOCK_MONOTONIC, &(nextToRun->initialTime));
         
         //Call the thread. Note it will not return back here, because the thread has another context. It will return to the return context sat in its structure.
         setcontext(&(nextToRun->context));
@@ -101,10 +101,7 @@ void changeStateToReady(Tcb* tcbToChange) {
     
     // calculates the total of time executing by the thread
     if (!tcbToChange) {
-        if (executingThread->initialTime)
-            executingThread->executedTime = executingThread->initialTime - time(NULL);
-        else
-            executingThread->executedTime = 0;
+        executingThread->executedTime = calculateExecuteTime(executingThread);
     }
 
     // enqueues the thread in the ready prioriry queue, if tcbToChange is null, then
@@ -130,10 +127,7 @@ boolean changeStateToWaiting(Tcb* tcbToDepend) {
             assert(executingThread != NULL);
             
             // calculates the total of time executing by the thread
-            if (executingThread->initialTime)
-                executingThread->executedTime = executingThread->initialTime - time(NULL);
-            else
-                executingThread->executedTime = 0;
+            executingThread->executedTime = calculateExecuteTime(executingThread);
 
             tcbToDepend->waitingThId = executingThread->id;
         }
@@ -253,5 +247,17 @@ void initialize(void) {
         newOrderedQueue(readyQueue);
         
         terminateContext = (ucontext_t*)malloc(sizeof(ucontext_t));
+    }
+}
+
+unsigned long calculateExecuteTime(Tcb* thread) {
+    struct timespec now;
+    
+    if (thread->initialTime.tv_sec) {
+        clock_gettime(CLOCK_MONOTONIC, &now);
+        
+        return (now.tv_sec - thread->initialTime.tv_sec) + (now.tv_nsec - thread->initialTime.tv_nsec);
+    } else {
+        return 0;
     }
 }
