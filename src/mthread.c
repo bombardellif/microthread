@@ -93,7 +93,9 @@ int mmutex_init(mmutex_t *mutex) {
     
     initialize();
     
-    newmmutex_t(mutex);
+    if (mutex) {
+        newmmutex_t(mutex);
+    }
     
     return (mutex) ? 0 : -1;
 }
@@ -104,25 +106,23 @@ int mlock (mmutex_t *mutex) {
     initialize();
     
     if (mutex) {
-        if (mutex->flag == Free) {
-            setFlag(mutex, Locked);
-        } else {
-            
-            execThread = getExecutingThread();
-            
-            // While the thread doesn't get the lock, it will keep blocking and
-            // trying again
-            while (mutex->flag != Free) {
-                
-                setYielding(TRUE);
-                
-                addToWaitingQueue(mutex, &execThread->id);
-                
-                saveContext();
-                
-                schedule();
-            }
+        
+        execThread = getExecutingThread();
+        
+        // While the thread doesn't get the lock, it will keep blocking and
+        // trying again
+        while (mutex->flag != Free) {
+
+            setYielding(TRUE);
+
+            addToWaitingQueue(mutex, &execThread->id);
+
+            saveContext();
+            schedule();
         }
+        
+        setFlag(mutex, Locked);
+        mutex->ownerThread = execThread->id;
         
         return 0;
     }
@@ -132,19 +132,26 @@ int mlock (mmutex_t *mutex) {
 
 int munlock (mmutex_t *mutex) {
     Tcb *targetThread;
+    int *waitingThreadId;
     
     initialize();
     
-    if (mutex && (mutex->flag == Locked)) {
+    if (mutex
+    && (mutex->flag == Locked)
+    && (mutex->ownerThread == getExecutingThread()->id)) {
         
         setFlag(mutex, Free);
         
-        targetThread = getThreadById(*(getFromWaitingQueue(mutex)));
-        
-        if (targetThread) {
-            
-            changeStateToReady(targetThread);
-            
+        waitingThreadId = getFromWaitingQueue(mutex);
+        if (waitingThreadId) {
+            targetThread = getThreadById(*waitingThreadId);
+
+            if (targetThread) {
+
+                changeStateToReady(targetThread);
+                return 0;
+            }
+        } else {
             return 0;
         }
     }

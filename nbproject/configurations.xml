@@ -25,7 +25,6 @@
       <itemPath>src/Tcb.c</itemPath>
       <itemPath>src/mmutex_t.c</itemPath>
       <itemPath>src/mthread.c</itemPath>
-      <itemPath>src/teste.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -59,7 +58,7 @@
           <warningLevel>2</warningLevel>
         </cTool>
         <archiverTool>
-          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread.a</output>
+          <output>lib/libmthread.a</output>
         </archiverTool>
       </compileType>
       <item path="include/List.h" ex="false" tool="3" flavor2="0">
@@ -87,8 +86,6 @@
       <item path="src/mmutex_t.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="src/teste.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="3">
@@ -139,8 +136,6 @@
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="src/teste.c" ex="false" tool="0" flavor2="0">
-      </item>
     </conf>
     <conf name="AppDebug" type="1">
       <toolsSet>
@@ -156,6 +151,7 @@
           <warningLevel>2</warningLevel>
         </cTool>
         <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread</output>
           <linkerLibItems>
             <linkerOptionItem>-lrt</linkerOptionItem>
           </linkerLibItems>
@@ -186,8 +182,6 @@
       <item path="src/mmutex_t.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/mthread.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="src/teste.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -8,10 +8,7 @@
 #ifndef MMUTEX_T_H
 #define	MMUTEX_T_H
 
-#include "OrderedQueue.h"
 #include "mdata.h"
-
-typedef enum {Locked, Free} MutexFlag;
 
 
 mmutex_t* newmmutex_t(mmutex_t* mutex);

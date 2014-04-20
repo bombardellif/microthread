@@ -31,9 +31,11 @@ typedef struct SListDesc{
 //"Extends" List
 typedef List OrderedQueue;
 
+typedef enum {Locked, Free} MutexFlag;
 
 typedef struct Smmutex_t{
-    int flag;
+    MutexFlag flag;
+    int ownerThread;
     OrderedQueue* waitingQueue;
 } mmutex_t;
 

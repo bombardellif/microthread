@@ -40,8 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Scheduler.o \
 	${OBJECTDIR}/src/Tcb.o \
 	${OBJECTDIR}/src/mmutex_t.o \
-	${OBJECTDIR}/src/mthread.o \
-	${OBJECTDIR}/src/teste.o
+	${OBJECTDIR}/src/mthread.o
 
 
 # C Compiler Flags
@@ -62,13 +61,13 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread.a
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk lib/libmthread.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread.a: ${OBJECTFILES}
-	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread.a
-	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread.a ${OBJECTFILES} 
-	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread.a
+lib/libmthread.a: ${OBJECTFILES}
+	${MKDIR} -p lib
+	${RM} lib/libmthread.a
+	${AR} -rv lib/libmthread.a ${OBJECTFILES} 
+	$(RANLIB) lib/libmthread.a
 
 ${OBJECTDIR}/src/List.o: src/List.c 
 	${MKDIR} -p ${OBJECTDIR}/src
@@ -100,18 +99,13 @@ ${OBJECTDIR}/src/mthread.o: src/mthread.c
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/mthread.o src/mthread.c
 
-${OBJECTDIR}/src/teste.o: src/teste.c 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -Iinclude -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/teste.o src/teste.c
-
 # Subprojects
 .build-subprojects:
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmthread.a
+	${RM} lib/libmthread.a
 
 # Subprojects
 .clean-subprojects:

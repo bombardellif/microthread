@@ -34,7 +34,6 @@ void listCheckRep(List* listDescriber){
             //move forward
             current = current->next;
         }
-        printf("%d",size);
         
         if (size == 0){
             assert(listDescriber->begin == NULL);
@@ -53,8 +52,6 @@ void listCheckRep(List* listDescriber){
             assert(listDescriber->begin->prev == NULL);
             assert(listDescriber->end->next == NULL);
         }
-    }else{
-        printf("%d",0);
     }
 }
 

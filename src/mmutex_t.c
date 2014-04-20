@@ -6,12 +6,12 @@
  */
 
 #include "mmutex_t.h"
+#include "OrderedQueue.h"
 #include <stdlib.h>
 
 #include <assert.h>
 
 mmutex_t* newmmutex_t(mmutex_t* mutex){
-    mutex = (mmutex_t*)malloc(sizeof(mmutex_t));
     mutex->flag = Free;
     mutex->waitingQueue = newOrderedQueue();
     return mutex;
