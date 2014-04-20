@@ -1,0 +1,409 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{float}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\graphicspath{ {img/} }
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+%\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center header
+\rhead{\hmwkClass: \hmwkTitle} % Top center header
+%\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Página\ \thepage\ de\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continuação na próxima página\ldots}\nobreak
+\nobreak\extramarks{#1 (continuação)}{#1 continuação na próxima página\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continuação)}{#1 continuação na próxima página\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Questão \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argumen
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Trabalho \#1} % Assignment title
+\newcommand{\hmwkDueDate}{24 de Abril de 2014} % Due date
+\newcommand{\hmwkClass}{INF01142} % Course/class
+\newcommand{\hmwkClassFull}{INF01142: Sistemas Operacionais I N} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Fernando Bombardelli da Silva(218324), William Bombardelli da Silva(218324)} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+%\vspace{2in}
+\Large\textmd{\textbf{\hmwkClassFull}}\\
+\normalsize{\textbf{\hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{\hmwkDueDate}\\
+%\vspace{0.1in}
+\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+%\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%\maketitle
+{\centering
+\Large\textmd{\textbf{\hmwkClassFull}}\\
+\normalsize{\textbf{\hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{\hmwkDueDate}\\
+%\vspace{0.1in}
+\large\textbf{\hmwkAuthorName}
+%\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}\\
+
+}
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+%\newpage
+%\tableofcontents
+%\newpage
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+%----------------------------------------------------------------------------------------
+%	Questão 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 2]
+
+\begin{itemize}
+\item Plataforma 1:
+	\begin{itemize}
+	\item Processador:
+		\begin{itemize}
+		\item Intel Core i3 @2,30 GHz
+		\item 2 cores com suporte a HT (4 thread cores)
+		\end{itemize}
+	\item Sistema Operacional:
+		\begin{itemize}
+		\item GNU/Linux CentOS 6.5
+		\item Kernel Linux 2.6.32 (x86\underline{ }64)
+		\end{itemize}
+	\item Compilador:
+		\begin{itemize}
+		\item GCC 4.4.7
+		\end{itemize}
+	\item Ambiente não virtualizado
+	\end{itemize}
+\item Plataforma 2:
+	\begin{itemize}
+	\item Processador:
+		\begin{itemize}
+		\item Intel Core i3 @2,30 GHz
+		\item 2 cores com suporte a HT (4 thread cores)
+		\end{itemize}
+	\item Sistema Operacional:
+		\begin{itemize}
+		\item GNU/Linux Ubuntu 12.04
+		\item Kernel Linux 3.2.0 (x86\underline{ }64)
+		\end{itemize}
+	\item Compilador:
+		\begin{itemize}
+		\item GCC 4.6.3
+		\end{itemize}
+	\item Ambiente não virtualizado
+	\end{itemize}
+\end{itemize}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Questão 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 3]
+
+\begin{tabular}{l | l}
+	\hline
+	\textbf{Função} & \textbf{Correção} \\ \hline
+	mcreate & Correto\\
+	myield & Correto\\
+	mjoin & Correto\\
+	mmutex\_init & Correto\\
+	mlock & Correto\\
+	munlock & Correto\\
+	\hline
+\end{tabular}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Questão 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 4]
+
+\begin{homeworkSection}{ListElem}
+
+	Estrutura utilizada pelo módulo de lista encadeada para armazenar o dado da lista e controlar o encadeamento.
+	\begin{lstlisting}[language=C, frame=single]
+typedef struct SListElem ListElem;
+
+struct SListElem{
+ void *e;
+ ListElem *prev;
+ ListElem *next;
+};
+	\end{lstlisting}
+	
+\end{homeworkSection}
+
+\begin{homeworkSection}{List}
+
+	Estrutura utilizada como descritor da lista encadeada, contém o apontador de início e fim da lista.
+	\begin{lstlisting}[language=C, frame=single]
+typedef struct SListDesc{
+ ListElem *begin;
+ ListElem *end;
+} List;
+// Operacoes:
+List* newList();
+void freeList(List* listDescriber);
+void listCheckRep(List* listDescriber);
+void listAdd(List* listDescriber, void* e, int (*comparator) (void*, void*));
+void listAppend(List* listDescriber, void* e);
+void* listGet(List* listDescriber, void* e, int (*comparator) (void*, void*));
+void listRemove(List* listDescriber, void* e, int(*comparator)(void*,void*));
+	\end{lstlisting}
+	
+\end{homeworkSection}
+
+\begin{homeworkSection}{OrderedQueue}
+
+	O tipo \emph{OrdereQueue} é uma estrutura de dados criada para controlar a fila de \emph{threads} aptas a rodar.\\
+	A operação \emph{Enqueue} insere um elemento na fila, porém sua posição depende do parâmetro \emph{comparator} informado, que vai determinar por comparação com os outros nós qual a posição do elemento entrante. Esta operação permite o escalonamento das \emph{threads} pela política Shortest Process Next.\\
+	A operação \emph{Dequeue} remove o primeiro elemento da lista.\\
+	De fato o descritor é idêntico ao descritor da lista encadeada.
+	\begin{lstlisting}[language=C, frame=single, breaklines=true]
+typedef List OrderedQueue;
+// Operacoes:
+OrderedQueue* newOrderedQueue();
+void freeOrderedQueue(OrderedQueue* queue);
+boolean orderedQueueEmpty(OrderedQueue* queue);
+void orderedQueueEnqueue(OrderedQueue* queue, void* e, int (*comparator) (void*, void*));
+void* orderedQueueDequeue(OrderedQueue* queue);
+	\end{lstlisting}
+	
+\end{homeworkSection}
+
+\begin{homeworkSection}{mmutex\_t}
+
+	Estrutura da variável de controle mutex.\\
+	O campo \emph{flag} é uma enumeração que pode assumir o valor \emph{Locked} ou \emph{Free} indicando o estado da seção crítica que a variável controla.\\
+	O campo \emph{ownerThread} contém o ID da \emph{thread} que detém o \emph{lock} da variável. Esse campo é utilizado para evitar que uma \emph{thread} diferente da que tem o \emph{lock} tente liberar a seção crítica.\\
+	O campo \emph{waitingQueue} mantém a fila dos IDs das \emph{threads} esperando pela liberação do \emph{lock}.
+	\begin{lstlisting}[language=C, frame=single]
+typedef enum {Locked, Free} MutexFlag;
+
+typedef struct Smmutex_t{
+    MutexFlag flag;
+    int ownerThread;
+    OrderedQueue* waitingQueue;
+} mmutex_t;
+	\end{lstlisting}
+	
+\end{homeworkSection}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Questão 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 5 - myield]
+
+\begin{tabular}{l | l | p{10cm}}
+	\hline
+	\textbf{Momento} & \textbf{Chamada de Sistema} & \textbf{Descrição} \\ \hline
+	T1 & getcontext & Salva o contexto da \emph{thread main}. É executada apenas uma vez durante toda a execução do programa, com o intuito de criar as estruturas necessárias para realizar o escalonamento da \emph{thread main} juntamente com as demais.\\ \hline
+	T2 & clock\_gettime & Consulta o \emph{timer} do sistema para calcular o tempo executado pela \emph{thread} corrente.\\ \hline
+	T3 & getcontext & Salva o contexto da \emph{thread} corrente na sua estrutura TCB. Quando esta for chamada novamente, sua execução retornará  a esse ponto. Note que neste caso o escalonamento não será executado em função do controle da variável global \emph{yielding}.\\ \hline
+	T4 & clock\_gettime & Salva o tempo atual em um campo do TCB da \emph{thread} que será posta em execução pelo escalonador. Esse tempo será usado posteriormente para definir o tempo executado pela \emph{thread}.\\ \hline
+	T5 & swapcontext & Troca o contexto atual pelo contexto da \emph{thread} selecionada para executar. A partir desse ponto a próxima \emph{thread} entrará em execução.\\
+	\hline
+\end{tabular}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Questão 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 6 - mjoin]
+
+\begin{tabular}{l | l | p{10cm}}
+	\hline
+	\textbf{Momento} & \textbf{Chamada de Sistema} & \textbf{Descrição} \\ \hline
+	T1 & getcontext & Salva o contexto da \emph{thread main}. É executada apenas uma vez durante toda a execução do programa, com o intuito de criar as estruturas necessárias para realizar o escalonamento da \emph{thread main} juntamente com as demais.\\ \hline
+	T2 & clock\_gettime & Consulta o \emph{timer} do sistema para calcular o tempo executado pela \emph{thread} corrente.\\ \hline
+	T3 & getcontext & Salva o contexto da \emph{thread} corrente na sua estrutura TCB. Quando esta for chamada novamente (após o fim da \emph{thread} a ser esperada), sua execução retornará  a esse ponto. Note que neste caso o escalonamento não será executado em função do controle da variável global \emph{yielding}.\\ \hline
+	T4 & clock\_gettime & Salva o tempo atual em um campo do TCB da \emph{thread} que será posta em execução pelo escalonador. Esse tempo será usado posteriormente para definir o tempo executado pela \emph{thread}.\\ \hline
+	T5 & swapcontext & Troca o contexto atual pelo contexto da \emph{thread} selecionada para executar. A partir desse ponto a próxima \emph{thread} entrará em execução.\\
+	\hline
+\end{tabular}
+
+Note que caso uma \emph{thread} execute \emph{mjoin} para esperar por uma \emph{thread} que ja tenha sido encerrada, \emph{mjoin} retorna código de erro -1, seguindo especificação. Note ainda que este é o mesmo comportamento do caso de o id recebido por parâmetro em \emph{mjoin} não seja válido (não exista \emph{thread} com tal id).
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Questão 7
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 7 - mlock]
+
+\begin{tabular}{l | l | p{10cm}}
+	\hline
+	\textbf{Momento} & \textbf{Chamada de Sistema} & \textbf{Descrição} \\ \hline
+	T1 & getcontext & Salva o contexto da \emph{thread main}. É executada apenas uma vez durante toda a execução do programa, com o intuito de criar as estruturas necessárias para realizar o escalonamento da \emph{thread main} juntamente com as demais.\\ \hline
+	T2 & getcontext & Salva o contexto da \emph{thread} corrente na sua estrutura TCB. Quando esta for chamada novamente sua execução retornará a esse ponto. Note que neste caso o escalonamento não será executado em função do controle da variável global \emph{yielding}.\\ \hline
+	T3 & clock\_gettime & Salva o tempo atual em um campo do TCB da \emph{thread} que será posta em execução pelo escalonador. Esse tempo será usado posteriormente para definir o tempo executado pela \emph{thread}.\\ \hline
+	T4 & swapcontext & Troca o contexto atual pelo contexto da \emph{thread} selecionada para executar. A partir desse ponto a próxima \emph{thread} entrará em execução.\\
+	\hline
+\end{tabular}
+
+Note que os passos dos tempos T2, T3 e T4 executam enquanto a variável \emph{mutex} em questão não estiver livre. Ou seja, se na chamada para \emph{mlock} o \emph{mutex} estiver livre, as chamadas de sistema nos tempos T2, T3 e T4 não serão executadas.
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Questão 8
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 8 - munlock]
+
+\begin{tabular}{l | l | p{10cm}}
+	\hline
+	\textbf{Momento} & \textbf{Chamada de Sistema} & \textbf{Descrição} \\ \hline
+	T1 & getcontext & Salva o contexto da \emph{thread main}. É executada apenas uma vez durante toda a execução do programa, com o intuito de criar as estruturas necessárias para realizar o escalonamento da \emph{thread main} juntamente com as demais.\\ \hline
+	T2 & clock\_gettime & Consulta o \emph{timer} do sistema para calcular o tempo executado pela \emph{thread} corrente. Após isto, muda o estado de uma \emph{thread} que estava esperando pelo \emph{unlock} para apto.\\
+	\hline
+\end{tabular}
+
+Note que o passo do tempo T2 executa apenas se houver alguma \emph{thread} na fila dos bloqueados por este lock.
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Questão 9
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 9]
+
+Os testes da biblioteca seguiram os seguintes passos:
+\begin{enumerate}
+\item Testes unitários nos módulos de lista encadeada e de fila da biblioteca.
+\item Debug passo a passo para funcionalidades essenciais das funções oferecidas pela biblioteca e das funções do escalonador. Nesse passo foi utilizado o GDB integrado à IDE NetBeans.
+\item Testes unitários das funções oferecidas pela bilbioteca.
+\item Testes de sistema utilizando a biblioteca \emph{libmmthread.a} finalizada juntamente com programas chamadores que exploram diversas funcionalidades.
+\end{enumerate}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Questão 10
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Questão 10]
+
+\begin{tabular}{l | p{6cm} | p{6cm}}
+	\hline
+	\textbf{Dificuldade} & \textbf{Descrição} & \textbf{Solução Utilizada}\\ \hline
+	Análise do problema & A análise foi o ponto que exigiu o maior esforço de raciocínio. Uma boa análise e planejamento implicariam certamente uma boa execução do desenvolvimento. & Para facilitar a análise foi utilizado diagramas de classe UML (para descrever os módulos) e diagramas de sequência (para descrever as chamadas de funções internas à biblioteca). A saber, a ferramenta utilizada foi o Astah Community.\\ \hline
+	Chamada de sistema & Uma dificuldade bem específica encontrada foi a utilização das chamadas de sistema que facilitassem as trocas de contexto. Primeiramente utilizou-se \emph{setcontext} para carregar um novo contexto, porém em algumas circunstâncias ocorria uma exceção de ponto flutuante dentro da função \emph{setcontext}. Mais detalhes no \href{http://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf}{Manual da Intel} página 369. & Utilizar \emph{swapcontext} para a troca de contexto. \\ \hline
+	Depuração & Erros inesperados naturalmente ocorreram, dado que é muito difícil prever todas as situações no momento da análise. & Para depurar o código e resolver tais erros foi utilizado o GDB integrado à IDE Netbeans.\\
+	\hline
+	Testes & Outra dificuldade encontrada foi desenvolver casos de testes capazes de comprovar a correção e a completude, ou seja, a partir da especifiação ela faz o que é proposto de meneira correta. & Tentou-se projetar casos de testes de maneira a alcançar um maior \emph{coverage} de código, e mostrar que não há contradição entra a especificação e a implementação.
+\end{tabular}
+\end{homeworkProblem}
+
+\end{document}
+
