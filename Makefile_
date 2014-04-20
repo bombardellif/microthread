@@ -1,0 +1,56 @@
+#C Compiler
+CFLAGS = -Wall
+CLIBS = -lrt
+CC = gcc
+SRC_FOLDER = src
+INC_FOLDER = include
+LIB_DESTINY_FOLDER = lib
+TEST_FOLDER = testes
+BIN_DESTINY_FOLDER = bin
+#Arquiver
+AR = ar
+AR_OPT = crs
+LIB_NAME = mthread
+
+
+all: lib testes
+
+List: $(INC_FOLDER)/List.h
+	$(CC) -c $(CFLAGS) $(CLIBS) -I $(INC_FOLDER)/ $(SRC_FOLDER)/List.c -o $(LIB_DESTINY_FOLDER)/List.o
+
+OrderedQueue: $(INC_FOLDER)/OrderedQueue.h
+	$(CC) -c $(CFLAGS) $(CLIBS) -I $(INC_FOLDER)/ $(SRC_FOLDER)/OrderedQueue.c -o $(LIB_DESTINY_FOLDER)/OrderedQueue.o
+
+Scheduler: $(INC_FOLDER)/Scheduler.h
+	$(CC) -c $(CFLAGS) $(CLIBS) -I $(INC_FOLDER)/ $(SRC_FOLDER)/Scheduler.c -o $(LIB_DESTINY_FOLDER)/Scheduler.o
+
+Tcb: $(INC_FOLDER)/Tcb.h
+	$(CC) -c $(CFLAGS) $(CLIBS) -I $(INC_FOLDER)/ $(SRC_FOLDER)/Tcb.c -o $(LIB_DESTINY_FOLDER)/Tcb.o
+
+mmutex_t: $(INC_FOLDER)/mmutex_t.h
+	$(CC) -c $(CFLAGS) $(CLIBS) -I $(INC_FOLDER)/ $(SRC_FOLDER)/mmutex_t.c -o $(LIB_DESTINY_FOLDER)/mmutex_t.o
+
+mthread: $(INC_FOLDER)/mthread.h
+	$(CC) -c $(CFLAGS) $(CLIBS) -I $(INC_FOLDER)/ $(SRC_FOLDER)/mthread.c -o $(LIB_DESTINY_FOLDER)/mthread.o
+
+lib: List OrderedQueue Scheduler Tcb mmutex_t mthread
+	$(AR) $(AR_OPT) $(LIB_DESTINY_FOLDER)/lib$(LIB_NAME).a $(LIB_DESTINY_FOLDER)/List.o $(LIB_DESTINY_FOLDER)/OrderedQueue.o $(LIB_DESTINY_FOLDER)/Scheduler.o $(LIB_DESTINY_FOLDER)/Tcb.o $(LIB_DESTINY_FOLDER)/mmutex_t.o $(LIB_DESTINY_FOLDER)/mthread.o
+
+teste0: lib
+	$(CC) $(CFLAGS) -I $(INC_FOLDER) $(TEST_FOLDER)/teste0.c -o $(BIN_DESTINY_FOLDER)/teste0 -L $(LIB_DESTINY_FOLDER) -l$(LIB_NAME) $(CLIBS)
+
+teste1: lib
+	$(CC) $(CFLAGS) -I $(INC_FOLDER) $(TEST_FOLDER)/teste1.c -o $(BIN_DESTINY_FOLDER)/teste1 -L $(LIB_DESTINY_FOLDER) -l$(LIB_NAME) $(CLIBS)
+
+teste2: lib
+	$(CC) $(CFLAGS) -I $(INC_FOLDER) $(TEST_FOLDER)/teste2.c -o $(BIN_DESTINY_FOLDER)/teste2 -L $(LIB_DESTINY_FOLDER) -l$(LIB_NAME) $(CLIBS)
+
+testes: lib teste0 teste1 teste2
+
+clean:
+	rm -rf $(BIN_DESTINY_FOLDER)/* $(LIB_DESTINY_FOLDER)/*.o $(LIB_DESTINY_FOLDER)/*.a
+
+
+	
+
+ 
