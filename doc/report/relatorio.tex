@@ -334,7 +334,7 @@ typedef struct Smmutex_t{
 	\hline
 \end{tabular}
 
-Note que caso uma \emph{thread} execute \emph{mjoin} para esperar por uma \emph{thread} que ja tenha sido encerrada, \emph{mjoin} retorna código de erro -1, seguindo especificação. Note ainda que este é o mesmo comportamento do caso de o id recebido por parâmetro em \emph{mjoin} não seja válido (não exista \emph{thread} com tal id).
+Note que, caso uma \emph{thread} execute \emph{mjoin} para esperar por uma \emph{thread} que já tenha sido encerrada, \emph{mjoin} retorna código de erro -1, seguindo especificação. Note ainda que este é o mesmo comportamento do caso de o id recebido por parâmetro em \emph{mjoin} não seja válido (não exista \emph{thread} com tal id).
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
@@ -353,7 +353,7 @@ Note que caso uma \emph{thread} execute \emph{mjoin} para esperar por uma \emph{
 	\hline
 \end{tabular}
 
-Note que os passos dos tempos T2, T3 e T4 executam enquanto a variável \emph{mutex} em questão não estiver livre. Ou seja, se na chamada para \emph{mlock} o \emph{mutex} estiver livre, as chamadas de sistema nos tempos T2, T3 e T4 não serão executadas.
+Note que, os passos dos tempos T2, T3 e T4 executam enquanto a variável \emph{mutex} em questão não estiver livre. Ou seja, se na chamada para \emph{mlock} o \emph{mutex} estiver livre, as chamadas de sistema nos tempos T2, T3 e T4 não serão executadas.
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
@@ -365,12 +365,10 @@ Note que os passos dos tempos T2, T3 e T4 executam enquanto a variável \emph{mu
 \begin{tabular}{l | l | p{10cm}}
 	\hline
 	\textbf{Momento} & \textbf{Chamada de Sistema} & \textbf{Descrição} \\ \hline
-	T1 & getcontext & Salva o contexto da \emph{thread main}. É executada apenas uma vez durante toda a execução do programa, com o intuito de criar as estruturas necessárias para realizar o escalonamento da \emph{thread main} juntamente com as demais.\\ \hline
-	T2 & clock\_gettime & Consulta o \emph{timer} do sistema para calcular o tempo executado pela \emph{thread} corrente. Após isto, muda o estado de uma \emph{thread} que estava esperando pelo \emph{unlock} para apto.\\
+	T1 & getcontext & Salva o contexto da \emph{thread main}. É executada apenas uma vez durante toda a execução do programa, com o intuito de criar as estruturas necessárias para realizar o escalonamento da \emph{thread main} juntamente com as demais.\\
 	\hline
 \end{tabular}
 
-Note que o passo do tempo T2 executa apenas se houver alguma \emph{thread} na fila dos bloqueados por este lock.
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
@@ -397,11 +395,12 @@ Os testes da biblioteca seguiram os seguintes passos:
 \begin{tabular}{l | p{6cm} | p{6cm}}
 	\hline
 	\textbf{Dificuldade} & \textbf{Descrição} & \textbf{Solução Utilizada}\\ \hline
-	Análise do problema & A análise foi o ponto que exigiu o maior esforço de raciocínio. Uma boa análise e planejamento implicariam certamente uma boa execução do desenvolvimento. & Para facilitar a análise foi utilizado diagramas de classe UML (para descrever os módulos) e diagramas de sequência (para descrever as chamadas de funções internas à biblioteca). A saber, a ferramenta utilizada foi o Astah Community.\\ \hline
+	Análise do problema & A análise foi o ponto que exigiu o maior esforço de raciocínio. Uma boa análise e planejamento implicariam certamente em uma boa execução do desenvolvimento. & Para facilitar a análise foi utilizado diagramas de classe UML (para descrever os módulos) e diagramas de sequência (para descrever as chamadas de funções internas à biblioteca). A saber, a ferramenta utilizada foi o Astah Community.\\ \hline
 	Chamada de sistema & Uma dificuldade bem específica encontrada foi a utilização das chamadas de sistema que facilitassem as trocas de contexto. Primeiramente utilizou-se \emph{setcontext} para carregar um novo contexto, porém em algumas circunstâncias ocorria uma exceção de ponto flutuante dentro da função \emph{setcontext}. Mais detalhes no \href{http://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf}{Manual da Intel} página 369. & Utilizar \emph{swapcontext} para a troca de contexto. \\ \hline
 	Depuração & Erros inesperados naturalmente ocorreram, dado que é muito difícil prever todas as situações no momento da análise. & Para depurar o código e resolver tais erros foi utilizado o GDB integrado à IDE Netbeans.\\
 	\hline
-	Testes & Outra dificuldade encontrada foi desenvolver casos de testes capazes de comprovar a correção e a completude, ou seja, a partir da especifiação ela faz o que é proposto de meneira correta. & Tentou-se projetar casos de testes de maneira a alcançar um maior \emph{coverage} de código, e mostrar que não há contradição entra a especificação e a implementação.
+	Testes & Outra dificuldade encontrada foi desenvolver casos de testes capazes de comprovar a correção e a completude da biblioteca. Ou seja, a partir da especificação, garantir que ela faça o que é proposto de maneira correta. & Tentou-se projetar casos de testes de modo a alcançar um maior \emph{coverage} de código e mostrar que não há contradição entre a especificação e a implementação.\\
+	\hline
 \end{tabular}
 \end{homeworkProblem}
 

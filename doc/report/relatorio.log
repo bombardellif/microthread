@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.9.10)  20 APR 2014 16:08
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.9.10)  20 APR 2014 16:41
 entering extended mode
  %&-line parsing enabled.
 **relatorio.tex
@@ -471,52 +471,52 @@ Overfull \hbox (4.3842pt too wide) in paragraph at lines 346--355
  []
 
 
-Overfull \hbox (4.3842pt too wide) in paragraph at lines 365--372
+Overfull \hbox (4.3842pt too wide) in paragraph at lines 365--371
 [] 
  []
 
 [4]
-Underfull \hbox (badness 1509) in paragraph at lines 401--401
+Underfull \hbox (badness 1509) in paragraph at lines 399--399
 []\OT1/cmr/m/n/10 Uma di-fi-cul-dade bem es-pec^^S^^Pfica en-
  []
 
 
-Underfull \hbox (badness 1990) in paragraph at lines 401--401
+Underfull \hbox (badness 1990) in paragraph at lines 399--399
 \OT1/cmr/m/n/10 das de sis-tema que fa-ci-li-tas-sem as
  []
 
 
-Underfull \hbox (badness 1142) in paragraph at lines 401--401
+Underfull \hbox (badness 1142) in paragraph at lines 399--399
 \OT1/cmr/m/n/10 tro-cas de con-texto. Pri-mei-ra-mente
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 401--401
+Underfull \hbox (badness 1132) in paragraph at lines 399--399
 \OT1/cmr/m/n/10 cunst^ancias ocor-ria uma exce^^Xc~ao de
  []
 
 
-Overfull \hbox (7.23376pt too wide) in paragraph at lines 397--407
+Overfull \hbox (7.23376pt too wide) in paragraph at lines 395--406
 []     
  []
 
-AED: lastpage setting LastPage [5] [6] (./relatorio.aux) ) 
+AED: lastpage setting LastPage [5] (./relatorio.aux) ) 
 Here is how much of TeX's memory you used:
- 5317 strings out of 256216
- 70058 string characters out of 1917072
+ 5316 strings out of 256216
+ 70052 string characters out of 1917072
  154361 words of memory out of 1500000
  8502 multiletter control sequences out of 10000+200000
  5803 words of font info for 21 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
  29i,11n,51p,644b,1992s stack positions out of 5000i,500n,6000p,200000b,15000s
-</usr/share/texmf/fon
-ts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.
-pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf/fonts/
-type1/bluesky/cm/cmr9.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb><
-/usr/share/texmf/fonts/type1/bluesky/cm/cmti10.pfb>
-Output written on relatorio.pdf (6 pages, 81045 bytes).
+</usr/share/texmf/fonts/t
+ype1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb>
+</usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf/fonts/type
+1/bluesky/cm/cmr9.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb></usr
+/share/texmf/fonts/type1/bluesky/cm/cmti10.pfb>
+Output written on relatorio.pdf (5 pages, 79574 bytes).
 PDF statistics:
- 174 PDF objects out of 1000 (max. 8388607)
- 61 named destinations out of 1000 (max. 131072)
+ 168 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 131072)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
