@@ -261,7 +261,7 @@ void testOrderedQueue(){
 }
 
 void fun0(int* arg){
-    int i,j;
+    int i;
     for(i=0;i < *arg; i++){
         //for(j=0;j<1000; j++);
         printf("fun0: %d\n",i);
@@ -272,7 +272,7 @@ void fun0(int* arg){
 }
 
 void fun1(int* arg){
-    int i,j;
+    int i;
     for(i=0;i < *arg; i++){
         //for(j=0;j<1000; j++);
         printf("fun1: %d\n",i);
@@ -283,7 +283,7 @@ void fun1(int* arg){
 }
 
 void fun2(int* arg){
-    int i,j;
+    int i;
     for(i=0;i < *arg; i++){
         //for(j=0;j<100; j++);
         printf("fun2: %d\n",i);
@@ -351,7 +351,7 @@ void fun12(int* arg){
 
 void fun11(int *arg){
     int i;
-    int id1, id2;
+    int id1;
     
     id1 = mcreate((void (*)(void*))fun12, arg);
     printf("fun11: fun12 created\n");
@@ -365,15 +365,15 @@ void fun11(int *arg){
 }
 
 void testMthread2(){
-    void *arg;
-    int id0, id1, id2, id3, i;
+    void *arg = NULL;
+    int id1, id2, i;
     
     //This have to work without crashing
     myield();
     myield();
     
     //Simple Test with one single thread
-    id0 = mcreate((void (*)(void*))fun10, NULL);
+    mcreate((void (*)(void*))fun10, NULL);
     printf("\nmain: fun10 create\n");
     myield();
     
@@ -389,7 +389,7 @@ void testMthread2(){
     myield();
     
     //fun12 will require join from fun10
-    id3 = mcreate((void (*)(void*))fun12, &id1);
+    mcreate((void (*)(void*))fun12, &id1);
     printf("main: fun12 created[2]\n");
     myield();
     
@@ -406,8 +406,7 @@ void testMthread2(){
 }
 
 void testMthread3(){
-    void *arg;
-    int id0, id1, id2, id3, i;
+    int id0, id1;
     
     //fun12 will require join from main thread
     id0 = 0;

@@ -33,5 +33,7 @@ int main(int argc, char *argv[]) {
 	
     mjoin(id0);
     mjoin(id1);
+    
+    return 0;
 }
 

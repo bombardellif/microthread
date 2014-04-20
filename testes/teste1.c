@@ -9,6 +9,7 @@
 #include "mthread.h"
 #include "mmutex_t.h"
 #include "Scheduler.h" /*considera que este fonte está no diretório testes (vide seção 8)*/
+#include "OrderedQueue.h"
 
 #include <assert.h>
 
@@ -209,6 +210,6 @@ int main(int argc, char *argv[]) {
     testMutex_unlock();
     printf("\tSuccess!\n\n");
     
-    return;
+    return 0;
 }
 
